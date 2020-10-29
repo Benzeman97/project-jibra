@@ -7,11 +7,18 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface UserDAO extends JpaRepository<User, UserIdentity> {
 
-    @Query("from User where userId = :id and nicOrPassport = :u_id")
-    Optional<User> findUser(@Param("id") long userId,@Param("u_id") String uniqueId);
+
+    Optional<User> findUserByUserIdAndAndNicOrPassport(UserIdentity userIdentity);
+
+    @Query("from User")
+    Optional<List<User>> findAllUsers();
+
+    boolean existsUserByUserIdAndNicOrPassport(UserIdentity userIdentity);
+
 }
