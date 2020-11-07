@@ -1,7 +1,7 @@
-package com.benz.user.api.dao;
+package com.benz.jibra.user.api.dao;
 
-import com.benz.user.api.entity.User;
-import com.benz.user.api.entity.UserIdentity;
+import com.benz.jibra.user.api.entity.User;
+import com.benz.jibra.user.api.entity.UserIdentity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,12 +13,11 @@ import java.util.Optional;
 @Repository
 public interface UserDAO extends JpaRepository<User, UserIdentity> {
 
-
-    Optional<User> findUserByUserIdAndAndNicOrPassport(UserIdentity userIdentity);
-
     @Query("from User")
     Optional<List<User>> findAllUsers();
 
-    boolean existsUserByUserIdAndNicOrPassport(UserIdentity userIdentity);
+    @Query("from User where nicOrPassport=:id")
+    User existsUserByNicOrPassport(@Param("id") String identity);
+
 
 }

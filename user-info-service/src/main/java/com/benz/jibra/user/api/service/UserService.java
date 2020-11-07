@@ -1,6 +1,6 @@
-package com.benz.user.api.service;
+package com.benz.jibra.user.api.service;
 
-import com.benz.user.api.entity.User;
+import com.benz.jibra.user.api.entity.User;
 
 import java.util.List;
 

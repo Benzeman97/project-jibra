@@ -1,4 +1,4 @@
-package com.benz.user.api.db;
+package com.benz.jibra.user.api.db;
 
 public class Schema {
 

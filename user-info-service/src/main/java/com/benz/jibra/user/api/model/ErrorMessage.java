@@ -1,4 +1,4 @@
-package com.benz.user.api.model;
+package com.benz.jibra.user.api.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
-package com.benz.user.api.exception;
+package com.benz.jibra.user.api.exception;
 
-import com.benz.user.api.model.ErrorMessage;
+import com.benz.jibra.user.api.model.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

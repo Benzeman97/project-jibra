@@ -1,4 +1,4 @@
-package com.benz.user.api.exception;
+package com.benz.jibra.user.api.exception;
 
 public class DataNotFoundException extends RuntimeException {
 

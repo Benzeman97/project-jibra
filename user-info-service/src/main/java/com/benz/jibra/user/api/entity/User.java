@@ -1,13 +1,15 @@
-package com.benz.user.api.entity;
+package com.benz.jibra.user.api.entity;
 
-import com.benz.user.api.db.Schema;
+import com.benz.jibra.user.api.db.Schema;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -19,6 +21,7 @@ import java.util.Date;
 @Getter
 @Setter
 @IdClass(UserIdentity.class)
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
 public class User {
 
     @Id
@@ -35,9 +38,10 @@ public class User {
     @Column(name = "COUNTRY")
     private String country;
     @Column(name = "DOB")
-    private LocalDate dob;
+    private Date dob;
     @Column(name = "TELE_NO")
     private String teleNo;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "PASSWORD",nullable = false)
     private String password;
     @Id
@@ -45,5 +49,8 @@ public class User {
     private String nicOrPassport;
     @Column(name = "REGISTERED_DATE")
     private Date registeredDate;
+    @Column(name = "MODIFIED_DaTE")
+    private Date modifiedDate;
 
 }
+

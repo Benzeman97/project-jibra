@@ -1,4 +1,4 @@
-package com.benz.user.api.entity;
+package com.benz.jibra.user.api.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
