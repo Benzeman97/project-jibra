@@ -46,7 +46,7 @@ public class UserControllerTest {
     @MockBean
     private AuthEntryPoint authEntryPoint;
 
-    private Logger logger= LogManager.getLogger(UserControllerTest.class);
+   final private static Logger LOG= LogManager.getLogger(UserControllerTest.class);
 
 
     @Test
@@ -63,10 +63,9 @@ public class UserControllerTest {
                  // .andExpect(content().string(expectedUser))
                   .andReturn();
 
-        logger.info(result.getResponse().getContentAsString());
+        LOG.info(result.getResponse().getContentAsString());
 
         int actualStatus= result.getResponse().getStatus();
-
 
           assertEquals(HttpStatus.OK.value(),actualStatus,()->"expected "+HttpStatus.OK.value()+" but returned "+actualStatus);
 
@@ -88,6 +87,7 @@ public class UserControllerTest {
                 .andExpect(status().isOk())
                 .andReturn();
 
+        LOG.info(result.getResponse().getContentAsString());
 
         int actualStatus=result.getResponse().getStatus();
 
