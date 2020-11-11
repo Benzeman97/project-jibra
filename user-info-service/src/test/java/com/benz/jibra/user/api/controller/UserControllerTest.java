@@ -28,8 +28,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith({SpringExtension.class})
@@ -58,16 +57,16 @@ public class UserControllerTest {
 
         Mockito.when(userService.getUser(Mockito.any(User.class))).thenReturn(getUser_1());
 
-          MvcResult result=mockMvc.perform(get("/api/user/one").contentType(MediaType.APPLICATION_JSON_VALUE).content(expectedUser).accept(new String[]{MediaType.APPLICATION_JSON_VALUE}))
+          MvcResult result=mockMvc.perform(get("/api/user/one").contentType(MediaType.APPLICATION_JSON_VALUE).content(expectedUser))
                   .andExpect(status().isOk())
                  // .andExpect(content().string(expectedUser))
                   .andReturn();
 
-        LOG.info(result.getResponse().getContentAsString());
+        LOG.info("actual user is : "+result.getResponse().getContentAsString());
 
         int actualStatus= result.getResponse().getStatus();
 
-          assertEquals(HttpStatus.OK.value(),actualStatus,()->"expected "+HttpStatus.OK.value()+" but returned "+actualStatus);
+          assertEquals(HttpStatus.OK.value(),actualStatus,()->"expected status"+HttpStatus.OK.value()+" but actual status was "+actualStatus);
 
     }
 
@@ -83,18 +82,77 @@ public class UserControllerTest {
 
 
         MvcResult result=mockMvc.perform(post("/api/user/save").contentType(MediaType.APPLICATION_JSON_VALUE)
-        .content(expectedUser).accept(new String[]{MediaType.APPLICATION_JSON_VALUE}))
+        .content(expectedUser))
                 .andExpect(status().isOk())
                 .andReturn();
 
-        LOG.info(result.getResponse().getContentAsString());
-
         int actualStatus=result.getResponse().getStatus();
+
+        LOG.info("save actual status is : "+actualStatus);
 
         assertEquals(HttpStatus.OK.value(),actualStatus,()->"expected "+HttpStatus.OK.value()+" but was "+actualStatus);
 
 
     }
+
+    @Test
+    @DisplayName("getUsersTest")
+    public void getUsersTest() throws Exception
+    {
+
+        Mockito.when(userService.getUsers()).thenReturn(getUsers());
+
+           MvcResult result= mockMvc.perform(get("/api/user"))
+                    .andExpect(status().isOk())
+                    .andReturn();
+
+           int actualStatus=result.getResponse().getStatus();
+
+        LOG.info("actual users : "+result.getResponse().getContentAsString());
+
+        assertEquals(HttpStatus.OK.value(),actualStatus,()->"expected status "+HttpStatus.OK.value()+" but actual status was"+actualStatus);
+    }
+
+    @Test
+    @DisplayName("updateUserTest")
+    public void updateUserTest() throws Exception
+    {
+        User user=getUser_2();
+        user.setFirstName("Chopa Malli");
+        user.setModifiedDate(new Date());
+
+        String expectedUser=new ObjectMapper().writeValueAsString(user);
+
+        Mockito.when(userService.updateUser(Mockito.any(User.class))).thenReturn(user);
+
+       MvcResult result= mockMvc.perform(put("/api/user/update").contentType(MediaType.APPLICATION_JSON_VALUE).content(expectedUser))
+                .andExpect(status().isOk())
+                .andReturn();
+
+       int actualStatus=result.getResponse().getStatus();
+
+       LOG.info("actual user is "+result.getResponse().getContentAsString());
+
+       assertEquals(HttpStatus.OK.value(),actualStatus,()->"expected status "+HttpStatus.OK.value()+" but actual status was"+actualStatus);
+    }
+
+    @Test
+    @DisplayName("deleteUserTest")
+    public void deleteUserTest() throws Exception
+    {
+          String user=new ObjectMapper().writeValueAsString(getUser_2());
+
+          MvcResult result=mockMvc.perform(delete("/api/user/delete").contentType(MediaType.APPLICATION_JSON_VALUE).content(user))
+                  .andExpect(status().isOk())
+                  .andReturn();
+
+          int actualStatus=result.getResponse().getStatus();
+
+          LOG.info("delete actual status is : "+result.getResponse().getStatus());
+
+          assertEquals(HttpStatus.OK.value(),actualStatus,()->"expected status "+HttpStatus.OK.value()+" but actual status was "+actualStatus);
+    }
+
 
 
 

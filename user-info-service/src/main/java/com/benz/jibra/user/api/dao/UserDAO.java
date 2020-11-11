@@ -19,5 +19,8 @@ public interface UserDAO extends JpaRepository<User, UserIdentity> {
     @Query("from User where nicOrPassport=:id")
     User existsUserByNicOrPassport(@Param("id") String identity);
 
+    @Query("from User where userId=:user_id and nicOrPassport=:unique_id")
+    User existsUserByUserIdAndNicOrPassport(@Param("user_id") long id,@Param("unique_id") String identity);
+
 
 }

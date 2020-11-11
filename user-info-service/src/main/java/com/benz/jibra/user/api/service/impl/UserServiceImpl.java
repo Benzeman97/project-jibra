@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 
         boolean exist;
 
-        User n_user=userDAO.existsUserByNicOrPassport(user.getNicOrPassport());
+        User n_user=userDAO.findById(new UserIdentity(user.getUserId(),user.getNicOrPassport())).get();
 
         if(n_user!=null)
             exist=true;
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
 
         boolean exist;
 
-        User n_user=userDAO.existsUserByNicOrPassport(user.getNicOrPassport());
+        User n_user=userDAO.findById(new UserIdentity(user.getUserId(),user.getNicOrPassport())).get();
 
         if(n_user!=null)
             exist=true;

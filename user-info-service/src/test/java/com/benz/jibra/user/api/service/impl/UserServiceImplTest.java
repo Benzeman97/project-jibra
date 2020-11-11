@@ -79,10 +79,11 @@ public class UserServiceImplTest {
     @DisplayName("updateUserTest")
     public void updateUserTest() throws Exception{
         User expectedUser = getUser_1();
-        expectedUser.setFirstName("benz");
-        expectedUser.setTeleNo("071 93455434");
 
-        Mockito.when(userDAO.existsUserByNicOrPassport(expectedUser.getNicOrPassport())).thenReturn(getUser_1());
+        expectedUser.setFirstName("benz");
+        expectedUser.setTeleNo("+94 71 93455434");
+
+        Mockito.when(userDAO.findById(new UserIdentity(expectedUser.getUserId(),expectedUser.getNicOrPassport())).get()).thenReturn(expectedUser);
 
         Mockito.when(userDAO.save(expectedUser)).thenReturn(expectedUser);
 
@@ -96,7 +97,7 @@ public class UserServiceImplTest {
     public void deleteUserTest() throws Exception{
         User user = getUser_1();
 
-        Mockito.when(userDAO.existsUserByNicOrPassport(user.getNicOrPassport())).thenReturn(getUser_1());
+        Mockito.when(userDAO.findById(new UserIdentity(user.getUserId(),user.getNicOrPassport())).get()).thenReturn(getUser_1());
 
         userService.deleteUser(user);
 
