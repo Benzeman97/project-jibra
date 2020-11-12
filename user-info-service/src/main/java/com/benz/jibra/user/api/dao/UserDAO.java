@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface UserDAO extends JpaRepository<User, UserIdentity> {
 
-    @Query("from User")
+    @Query("from User order by userId asc")
     Optional<List<User>> findAllUsers();
 
     @Query("from User where nicOrPassport=:id")

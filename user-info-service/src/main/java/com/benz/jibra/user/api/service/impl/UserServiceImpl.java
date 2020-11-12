@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 
         boolean exist;
 
-        User n_user=userDAO.findById(new UserIdentity(user.getUserId(),user.getNicOrPassport())).get();
+        User n_user=userDAO.existsUserByUserIdAndNicOrPassport(user.getUserId(),user.getNicOrPassport());
 
         if(n_user!=null)
             exist=true;
@@ -85,12 +85,14 @@ public class UserServiceImpl implements UserService {
             exist=false;
 
         if(exist) {
-            LOG.info(String.format("user is updated with %d and %s",n_user.getUserId(),n_user.getNicOrPassport()));
-            return userDAO.save(n_user);
+            user.setRegisteredDate(n_user.getRegisteredDate());
+            user.setModifiedDate(new Date());
+            LOG.info(String.format("user is updated with %d and %s",user.getUserId(),user.getNicOrPassport()));
+            return userDAO.save(user);
         }
         else {
-            LOG.error(String.format("user is not found with $d and %s", n_user.getUserId(),n_user.getNicOrPassport()));
-            throw new DataNotFoundException(String.format("user is not found with %d and %s", n_user.getUserId(),n_user.getNicOrPassport()));
+            LOG.error(String.format("user is not found with $d and %s", user.getUserId(),user.getNicOrPassport()));
+            throw new DataNotFoundException(String.format("user is not found with %d and %s", user.getUserId(),user.getNicOrPassport()));
         }
     }
 
@@ -99,7 +101,7 @@ public class UserServiceImpl implements UserService {
 
         boolean exist;
 
-        User n_user=userDAO.findById(new UserIdentity(user.getUserId(),user.getNicOrPassport())).get();
+        User n_user=userDAO.existsUserByUserIdAndNicOrPassport(user.getUserId(),user.getNicOrPassport());
 
         if(n_user!=null)
             exist=true;
@@ -107,12 +109,12 @@ public class UserServiceImpl implements UserService {
             exist=false;
 
         if(exist) {
-            LOG.info(String.format("user is deleted with %d and %s",n_user.getUserId(),n_user.getNicOrPassport()));
-            userDAO.delete(n_user);
+            LOG.info(String.format("user is deleted with %d and %s",user.getUserId(),user.getNicOrPassport()));
+            userDAO.delete(user);
         }
         else {
-            LOG.info(String.format("user is not found with %d and %s",n_user.getUserId(),n_user.getNicOrPassport()));
-            throw new DataNotFoundException(String.format("user is not found with %d and %s",n_user.getUserId(),n_user.getNicOrPassport()));
+            LOG.info(String.format("user is not found with %d and %s",user.getUserId(),user.getNicOrPassport()));
+            throw new DataNotFoundException(String.format("user is not found with %d and %s",user.getUserId(),user.getNicOrPassport()));
         }
     }
 }
