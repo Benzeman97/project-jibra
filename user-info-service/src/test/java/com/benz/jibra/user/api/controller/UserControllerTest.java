@@ -45,125 +45,119 @@ public class UserControllerTest {
     @MockBean
     private AuthEntryPoint authEntryPoint;
 
-   final private static Logger LOG= LogManager.getLogger(UserControllerTest.class);
+    final private static Logger LOG = LogManager.getLogger(UserControllerTest.class);
 
 
     @Test
     @DisplayName("getUserTest")
-    public void getUserTest() throws Exception
-    {
+    public void getUserTest() throws Exception {
 
-          String expectedUser=new ObjectMapper().writeValueAsString(getUser_1());
+        String expectedUser = new ObjectMapper().writeValueAsString(getUser_1());
 
         Mockito.when(userService.getUser(Mockito.any(User.class))).thenReturn(getUser_1());
 
-          MvcResult result=mockMvc.perform(get("/api/user/one").contentType(MediaType.APPLICATION_JSON_VALUE).content(expectedUser))
-                  .andExpect(status().isOk())
-                 // .andExpect(content().string(expectedUser))
-                  .andReturn();
+        MvcResult result = mockMvc.perform(get("/api/user/one").contentType(MediaType.APPLICATION_JSON_VALUE).content(expectedUser))
+                .andExpect(status().isOk())
+                // .andExpect(content().string(expectedUser))
+                .andReturn();
 
-        LOG.info("actual user is : "+result.getResponse().getContentAsString());
+        LOG.info("actual user is : " + result.getResponse().getContentAsString());
 
-        int actualStatus= result.getResponse().getStatus();
+        int actualStatus = result.getResponse().getStatus();
 
-          assertEquals(HttpStatus.OK.value(),actualStatus,()->"expected status"+HttpStatus.OK.value()+" but actual status was "+actualStatus);
+        assertEquals(HttpStatus.OK.value(), actualStatus, () -> "expected status" + HttpStatus.OK.value() + " but actual status was " + actualStatus);
 
     }
 
     @Test
     @DisplayName("saveUserTest")
     @Disabled(value = "password is needed to perform this task")
-    public void saveUserTest() throws Exception
-    {
-        String expectedUser=new ObjectMapper().writeValueAsString(getUser_1());
+    public void saveUserTest() throws Exception {
+        String expectedUser = new ObjectMapper().writeValueAsString(getUser_1());
 
 
         Mockito.when(userService.saveUser(Mockito.any(User.class))).thenReturn(getUser_1());
 
 
-        MvcResult result=mockMvc.perform(post("/api/user/save").contentType(MediaType.APPLICATION_JSON_VALUE)
-        .content(expectedUser))
+        MvcResult result = mockMvc.perform(post("/api/user/save").contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(expectedUser))
                 .andExpect(status().isOk())
                 .andReturn();
 
-        int actualStatus=result.getResponse().getStatus();
+        int actualStatus = result.getResponse().getStatus();
 
-        LOG.info("save actual status is : "+actualStatus);
+        LOG.info("save actual status is : " + actualStatus);
 
-        assertEquals(HttpStatus.OK.value(),actualStatus,()->"expected "+HttpStatus.OK.value()+" but was "+actualStatus);
+        assertEquals(HttpStatus.OK.value(), actualStatus, () -> "expected " + HttpStatus.OK.value() + " but was " + actualStatus);
 
 
     }
 
     @Test
     @DisplayName("getUsersTest")
-    public void getUsersTest() throws Exception
-    {
+    public void getUsersTest() throws Exception {
 
         Mockito.when(userService.getUsers()).thenReturn(getUsers());
 
-           MvcResult result= mockMvc.perform(get("/api/user"))
-                    .andExpect(status().isOk())
-                    .andReturn();
+        MvcResult result = mockMvc.perform(get("/api/user"))
+                .andExpect(status().isOk())
+                .andReturn();
 
-           int actualStatus=result.getResponse().getStatus();
+        int actualStatus = result.getResponse().getStatus();
 
-        LOG.info("actual users : "+result.getResponse().getContentAsString());
+        LOG.info("actual users : " + result.getResponse().getContentAsString());
 
-        assertEquals(HttpStatus.OK.value(),actualStatus,()->"expected status "+HttpStatus.OK.value()+" but actual status was"+actualStatus);
+        assertEquals(HttpStatus.OK.value(), actualStatus, () -> "expected status " + HttpStatus.OK.value() + " but actual status was" + actualStatus);
     }
 
     @Test
     @DisplayName("updateUserTest")
-    public void updateUserTest() throws Exception
-    {
-        User user=getUser_2();
+    public void updateUserTest() throws Exception {
+        User user = getUser_2();
         user.setFirstName("Chopa Malli");
         user.setModifiedDate(new Date());
 
-        String expectedUser=new ObjectMapper().writeValueAsString(user);
+        String expectedUser = new ObjectMapper().writeValueAsString(user);
 
         Mockito.when(userService.updateUser(Mockito.any(User.class))).thenReturn(user);
 
-       MvcResult result= mockMvc.perform(put("/api/user/update").contentType(MediaType.APPLICATION_JSON_VALUE).content(expectedUser))
+        MvcResult result = mockMvc.perform(put("/api/user/update").contentType(MediaType.APPLICATION_JSON_VALUE).content(expectedUser))
                 .andExpect(status().isOk())
                 .andReturn();
 
-       int actualStatus=result.getResponse().getStatus();
+        int actualStatus = result.getResponse().getStatus();
 
-       LOG.info("actual user is "+result.getResponse().getContentAsString());
+        LOG.info("actual user is " + result.getResponse().getContentAsString());
 
-       assertEquals(HttpStatus.OK.value(),actualStatus,()->"expected status "+HttpStatus.OK.value()+" but actual status was"+actualStatus);
+        assertEquals(HttpStatus.OK.value(), actualStatus, () -> "expected status " + HttpStatus.OK.value() + " but actual status was" + actualStatus);
     }
 
     @Test
     @DisplayName("deleteUserTest")
-    public void deleteUserTest() throws Exception
-    {
-          String user=new ObjectMapper().writeValueAsString(getUser_2());
+    public void deleteUserTest() throws Exception {
+        String user = new ObjectMapper().writeValueAsString(getUser_2());
 
-          MvcResult result=mockMvc.perform(delete("/api/user/delete").contentType(MediaType.APPLICATION_JSON_VALUE).content(user))
-                  .andExpect(status().isOk())
-                  .andReturn();
+        MvcResult result = mockMvc.perform(delete("/api/user/delete").contentType(MediaType.APPLICATION_JSON_VALUE).content(user))
+                .andExpect(status().isOk())
+                .andReturn();
 
-          int actualStatus=result.getResponse().getStatus();
+        int actualStatus = result.getResponse().getStatus();
 
-          LOG.info("delete actual status is : "+result.getResponse().getStatus());
+        LOG.info("delete actual status is : " + result.getResponse().getStatus());
 
-          assertEquals(HttpStatus.OK.value(),actualStatus,()->"expected status "+HttpStatus.OK.value()+" but actual status was "+actualStatus);
+        assertEquals(HttpStatus.OK.value(), actualStatus, () -> "expected status " + HttpStatus.OK.value() + " but actual status was " + actualStatus);
     }
-
-
 
 
     private User getUser_1() throws ParseException {
 
-        SimpleDateFormat dateFormat=new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-        User user=new User();
+        User user = new User();
         user.setUserId(1001);
         user.setNicOrPassport("971230720V");
-        user.setFirstName("Nafaz");user.setLastName("Benzema");
+        user.setFirstName("Nafaz");
+        user.setLastName("Benzema");
         user.setEmail("nafazbenzema@gmail.com");
         user.setTeleNo("+97 7 164 5162");
         user.setCountry("Sri Lanka");
@@ -176,12 +170,13 @@ public class UserControllerTest {
 
     private User getUser_2() throws ParseException {
 
-        SimpleDateFormat dateFormat=new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-        User user=new User();
+        User user = new User();
         user.setUserId(1002);
         user.setNicOrPassport("4544678633456UK");
-        user.setFirstName("Kelly");user.setLastName("Brook");
+        user.setFirstName("Kelly");
+        user.setLastName("Brook");
         user.setEmail("brook@hotmail.com");
         user.setTeleNo("+32 87 765 5382");
         user.setCountry("United Kingdom");
@@ -193,8 +188,7 @@ public class UserControllerTest {
     }
 
 
-    private List<User> getUsers() throws Exception
-    {
-        return new ArrayList<>(Arrays.asList(getUser_1(),getUser_2()));
+    private List<User> getUsers() throws Exception {
+        return new ArrayList<>(Arrays.asList(getUser_1(), getUser_2()));
     }
 }

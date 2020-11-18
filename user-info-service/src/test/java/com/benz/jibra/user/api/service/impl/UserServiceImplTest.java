@@ -4,6 +4,7 @@ import com.benz.jibra.user.api.dao.UserDAO;
 import com.benz.jibra.user.api.entity.User;
 import com.benz.jibra.user.api.entity.UserIdentity;
 import com.benz.jibra.user.api.service.UserService;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.apache.logging.log4j.LogManager;
@@ -33,11 +34,11 @@ public class UserServiceImplTest {
     @MockBean
     private UserDAO userDAO;
 
-    private Logger logger= LogManager.getLogger(UserServiceImplTest.class);
+    private Logger logger = LogManager.getLogger(UserServiceImplTest.class);
 
     @Test
     @DisplayName("getUserTest")
-    public void getUserTest() throws Exception{
+    public void getUserTest() throws Exception {
 
         User expectedUser = getUser_1();
 
@@ -50,7 +51,7 @@ public class UserServiceImplTest {
 
     @Test
     @DisplayName("getUsersTest")
-    public void getUsersTest() throws Exception{
+    public void getUsersTest() throws Exception {
         List<User> expectedUsers = getUsers();
 
         Mockito.when(userDAO.findAllUsers()).thenReturn(Optional.of(expectedUsers));
@@ -77,13 +78,13 @@ public class UserServiceImplTest {
 
     @Test
     @DisplayName("updateUserTest")
-    public void updateUserTest() throws Exception{
+    public void updateUserTest() throws Exception {
         User expectedUser = getUser_1();
 
         expectedUser.setFirstName("benz");
         expectedUser.setTeleNo("+94 71 93455434");
 
-        Mockito.when(userDAO.existsUserByUserIdAndNicOrPassport(expectedUser.getUserId(),expectedUser.getNicOrPassport())).thenReturn(expectedUser);
+        Mockito.when(userDAO.existsUserByUserIdAndNicOrPassport(expectedUser.getUserId(), expectedUser.getNicOrPassport())).thenReturn(expectedUser);
 
         Mockito.when(userDAO.save(expectedUser)).thenReturn(expectedUser);
 
@@ -94,10 +95,10 @@ public class UserServiceImplTest {
 
     @Test
     @DisplayName("deleteUserTest")
-    public void deleteUserTest() throws Exception{
+    public void deleteUserTest() throws Exception {
         User user = getUser_1();
 
-        Mockito.when(userDAO.existsUserByUserIdAndNicOrPassport(user.getUserId(),user.getNicOrPassport())).thenReturn(user);
+        Mockito.when(userDAO.existsUserByUserIdAndNicOrPassport(user.getUserId(), user.getNicOrPassport())).thenReturn(user);
 
         userService.deleteUser(user);
 
