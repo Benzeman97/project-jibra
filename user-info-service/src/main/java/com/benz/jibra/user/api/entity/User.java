@@ -1,7 +1,6 @@
 package com.benz.jibra.user.api.entity;
 
 import com.benz.jibra.user.api.db.Schema;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

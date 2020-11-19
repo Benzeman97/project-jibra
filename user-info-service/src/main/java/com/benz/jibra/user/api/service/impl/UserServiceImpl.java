@@ -43,16 +43,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User saveUser(User user) {
 
-        boolean exist;
 
-        User n_user = userDAO.existsUserByNicOrPassport(user.getNicOrPassport());
+        User n_user = userDAO.existsUserByNicOrPassport(user.getNicOrPassport())
+                .orElse(null);
 
-        if (n_user != null)
-            exist = true;
-        else
-            exist = false;
-
-        if (!exist) {
+        if (n_user!=null)
+        {
+            LOG.error(String.format("User is existed with %d and %s", n_user.getUserId(), n_user.getNicOrPassport()));
+            throw new UserExistedException(String.format("user is existed with %d and %s", n_user.getUserId(), n_user.getNicOrPassport()));
+        }else
+        {
             String password = "{bcrypt}";
 
             password = password.concat(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
@@ -62,9 +62,6 @@ public class UserServiceImpl implements UserService {
             user.setModifiedDate(new Date());
             LOG.info(String.format("user is saved with %s", user.getNicOrPassport()));
             return userDAO.save(user);
-        } else {
-            LOG.error(String.format("User is existed with %d and %s", n_user.getUserId(), n_user.getNicOrPassport()));
-            throw new UserExistedException(String.format("user is existed with %d and %s", n_user.getUserId(), n_user.getNicOrPassport()));
         }
     }
 
@@ -72,16 +69,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(User user) {
 
-        boolean exist;
 
-        User n_user = userDAO.existsUserByUserIdAndNicOrPassport(user.getUserId(), user.getNicOrPassport());
+        User n_user = userDAO.existsUserByUserIdAndNicOrPassport(user.getUserId(), user.getNicOrPassport())
+                .orElse(null);
 
-        if (n_user != null)
-            exist = true;
-        else
-            exist = false;
-
-        if (exist) {
+        if (n_user!=null) {
             user.setRegisteredDate(n_user.getRegisteredDate());
             user.setModifiedDate(new Date());
             LOG.info(String.format("user is updated with %d and %s", user.getUserId(), user.getNicOrPassport()));
@@ -95,16 +87,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(User user) {
 
-        boolean exist;
+        User n_user = userDAO.existsUserByUserIdAndNicOrPassport(user.getUserId(), user.getNicOrPassport())
+                .orElse(null);
 
-        User n_user = userDAO.existsUserByUserIdAndNicOrPassport(user.getUserId(), user.getNicOrPassport());
-
-        if (n_user != null)
-            exist = true;
-        else
-            exist = false;
-
-        if (exist) {
+        if (n_user!=null) {
             LOG.info(String.format("user is deleted with %d and %s", user.getUserId(), user.getNicOrPassport()));
             userDAO.delete(user);
         } else {
@@ -112,4 +98,6 @@ public class UserServiceImpl implements UserService {
             throw new DataNotFoundException(String.format("user is not found with %d and %s", user.getUserId(), user.getNicOrPassport()));
         }
     }
+
 }
+
