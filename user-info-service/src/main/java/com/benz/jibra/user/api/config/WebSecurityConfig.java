@@ -11,9 +11,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private AuthEntryPoint authEntryPoint;
 
-    public WebSecurityConfig(AuthEntryPoint authEntryPoint)
-    {
-        this.authEntryPoint=authEntryPoint;
+    public WebSecurityConfig(AuthEntryPoint authEntryPoint) {
+        this.authEntryPoint = authEntryPoint;
     }
 
     @Override

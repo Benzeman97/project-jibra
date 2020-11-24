@@ -1,0 +1,177 @@
+2020-11-18 19:03:41.822  INFO 2888 --- [restartedMain] c.b.j.u.a.UserInfoServiceApplication     : The following profiles are active: oracle
+2020-11-18 19:03:45.655  INFO 2888 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-11-18 19:03:45.914  INFO 2888 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 239ms. Found 1 JPA repository interfaces.
+2020-11-18 19:03:46.485  INFO 2888 --- [restartedMain] o.s.c.c.s.GenericScope                   : BeanFactory id=85cffd4f-be6e-30fa-be49-8588e9eb6a97
+2020-11-18 19:03:49.543  INFO 2888 --- [restartedMain] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 9090 (http)
+2020-11-18 19:03:49.608  INFO 2888 --- [restartedMain] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2020-11-18 19:03:49.608  INFO 2888 --- [restartedMain] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-18 19:03:49.938  INFO 2888 --- [restartedMain] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2020-11-18 19:03:49.938  INFO 2888 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 8095 ms
+2020-11-18 19:03:50.360  INFO 2888 --- [restartedMain] o.s.s.c.ThreadPoolTaskExecutor           : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-18 19:03:50.558  INFO 2888 --- [task-1] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-11-18 19:03:50.687  WARN 2888 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-11-18 19:03:50.838  INFO 2888 --- [task-1] o.h.Version                              : HHH000412: Hibernate ORM core version 5.4.22.Final
+2020-11-18 19:03:50.946  INFO 2888 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 1ffc4b0a-4769-40a6-952e-2e10c1aabeef
+
+2020-11-18 19:03:51.337  INFO 2888 --- [restartedMain] o.s.s.w.DefaultSecurityFilterChain       : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@74236f47, org.springframework.security.web.context.SecurityContextPersistenceFilter@1961ca3a, org.springframework.security.web.header.HeaderWriterFilter@194b0154, org.springframework.security.web.authentication.logout.LogoutFilter@73efed26, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1487d3a7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4aada127, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@690a8361, org.springframework.security.web.session.SessionManagementFilter@41c4f872, org.springframework.security.web.access.ExceptionTranslationFilter@a729a93, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4d36b43f]
+2020-11-18 19:03:52.016  INFO 2888 --- [task-1] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-11-18 19:03:52.350  INFO 2888 --- [task-1] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2020-11-18 19:03:53.342  INFO 2888 --- [task-1] c.z.h.p.PoolBase                         : HikariPool-1 - Driver does not support get/set network timeout for connections. (Receiver class oracle.jdbc.driver.T4CConnection does not define or inherit an implementation of the resolved method abstract getNetworkTimeout()I of interface java.sql.Connection.)
+2020-11-18 19:03:53.350  INFO 2888 --- [task-1] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2020-11-18 19:03:53.431  INFO 2888 --- [task-1] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2020-11-18 19:03:53.716  INFO 2888 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-11-18 19:03:54.295  WARN 2888 --- [restartedMain] s.o.SpringCloudSecurityAutoConfiguration : All Spring Cloud Security modules and starters are deprecated. They will be moved to individual projects in the next major release.
+2020-11-18 19:03:54.341  INFO 2888 --- [restartedMain] o.s.b.a.e.w.EndpointLinksResolver        : Exposing 2 endpoint(s) beneath base path '/actuator'
+2020-11-18 19:03:56.817  INFO 2888 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-11-18 19:03:56.824  INFO 2888 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-11-18 19:03:57.055  INFO 2888 --- [restartedMain] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 9090 (http) with context path ''
+2020-11-18 19:03:57.539  INFO 2888 --- [restartedMain] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2020-11-18 19:03:58.270  INFO 2888 --- [restartedMain] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2020-11-18 19:03:58.282  INFO 2888 --- [restartedMain] c.b.j.u.a.UserInfoServiceApplication     : Started UserInfoServiceApplication in 19.767 seconds (JVM running for 28.9)
+2020-11-18 19:03:59.078  INFO 2888 --- [RMI TCP Connection(1)-172.20.32.1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-18 19:03:59.078  INFO 2888 --- [RMI TCP Connection(1)-172.20.32.1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2020-11-18 19:03:59.107  INFO 2888 --- [RMI TCP Connection(1)-172.20.32.1] o.s.w.s.DispatcherServlet                : Completed initialization in 28 ms
+2020-11-19 12:07:16.532  INFO 128 --- [restartedMain] c.b.j.u.a.UserInfoServiceApplication     : The following profiles are active: oracle
+2020-11-19 12:07:19.541  INFO 128 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-11-19 12:07:19.792  INFO 128 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 218ms. Found 1 JPA repository interfaces.
+2020-11-19 12:07:20.428  INFO 128 --- [restartedMain] o.s.c.c.s.GenericScope                   : BeanFactory id=85cffd4f-be6e-30fa-be49-8588e9eb6a97
+2020-11-19 12:07:22.564  INFO 128 --- [restartedMain] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 9090 (http)
+2020-11-19 12:07:22.673  INFO 128 --- [restartedMain] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2020-11-19 12:07:22.673  INFO 128 --- [restartedMain] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-19 12:07:22.935  INFO 128 --- [restartedMain] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2020-11-19 12:07:22.935  INFO 128 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6355 ms
+2020-11-19 12:07:23.521  INFO 128 --- [restartedMain] o.s.s.c.ThreadPoolTaskExecutor           : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-19 12:07:23.849  INFO 128 --- [task-1] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-11-19 12:07:23.927  WARN 128 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-11-19 12:07:24.271  INFO 128 --- [task-1] o.h.Version                              : HHH000412: Hibernate ORM core version 5.4.22.Final
+2020-11-19 12:07:24.286  INFO 128 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: a8b16533-fc6b-4909-a0eb-2d481e3744ba
+
+2020-11-19 12:07:24.614  INFO 128 --- [restartedMain] o.s.s.w.DefaultSecurityFilterChain       : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5bc4b609, org.springframework.security.web.context.SecurityContextPersistenceFilter@6bef4eef, org.springframework.security.web.header.HeaderWriterFilter@768680cc, org.springframework.security.web.authentication.logout.LogoutFilter@502404ef, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5f02920, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@609a3249, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@26b26e8d, org.springframework.security.web.session.SessionManagementFilter@65404155, org.springframework.security.web.access.ExceptionTranslationFilter@12a106a7, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@27161375]
+2020-11-19 12:07:25.996  INFO 128 --- [task-1] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-11-19 12:07:26.371  INFO 128 --- [task-1] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2020-11-19 12:07:26.980  INFO 128 --- [task-1] c.z.h.p.PoolBase                         : HikariPool-1 - Driver does not support get/set network timeout for connections. (Receiver class oracle.jdbc.driver.T4CConnection does not define or inherit an implementation of the resolved method abstract getNetworkTimeout()I of interface java.sql.Connection.)
+2020-11-19 12:07:26.980  INFO 128 --- [task-1] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2020-11-19 12:07:27.337  INFO 128 --- [task-1] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2020-11-19 12:07:27.629  INFO 128 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-11-19 12:07:28.191  WARN 128 --- [restartedMain] s.o.SpringCloudSecurityAutoConfiguration : All Spring Cloud Security modules and starters are deprecated. They will be moved to individual projects in the next major release.
+2020-11-19 12:07:28.191  INFO 128 --- [restartedMain] o.s.b.a.e.w.EndpointLinksResolver        : Exposing 2 endpoint(s) beneath base path '/actuator'
+2020-11-19 12:07:29.709  INFO 128 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-11-19 12:07:29.725  INFO 128 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-11-19 12:07:29.781  INFO 128 --- [restartedMain] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 9090 (http) with context path ''
+2020-11-19 12:07:30.402  INFO 128 --- [restartedMain] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2020-11-19 12:07:31.681  INFO 128 --- [restartedMain] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2020-11-19 12:07:31.696  INFO 128 --- [restartedMain] c.b.j.u.a.UserInfoServiceApplication     : Started UserInfoServiceApplication in 18.588 seconds (JVM running for 23.75)
+2020-11-19 12:07:32.370  INFO 128 --- [RMI TCP Connection(4)-172.20.32.1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-19 12:07:32.370  INFO 128 --- [RMI TCP Connection(4)-172.20.32.1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2020-11-19 12:07:32.386  INFO 128 --- [RMI TCP Connection(4)-172.20.32.1] o.s.w.s.DispatcherServlet                : Completed initialization in 16 ms
+2020-11-19 12:08:54.147  INFO 7816 --- [main] c.b.j.u.a.c.UserControllerTest           : The following profiles are active: oracle
+2020-11-19 12:08:55.975  INFO 7816 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 00391a98-0819-4018-ac35-6d05cd8845dc
+
+2020-11-19 12:08:56.116  INFO 7816 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@45f9d394, org.springframework.security.web.context.SecurityContextPersistenceFilter@23b71d24, org.springframework.security.web.header.HeaderWriterFilter@4052913c, org.springframework.security.web.authentication.logout.LogoutFilter@1247c72e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@589dfa6f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5280688, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1c2d63f0, org.springframework.security.web.session.SessionManagementFilter@6df791a4, org.springframework.security.web.access.ExceptionTranslationFilter@28bf82d9, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4d25f816]
+2020-11-19 12:08:56.928  INFO 7816 --- [main] o.s.s.c.ThreadPoolTaskExecutor           : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-19 12:08:57.288  INFO 7816 --- [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2020-11-19 12:08:57.303  INFO 7816 --- [main] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+2020-11-19 12:08:57.319  INFO 7816 --- [main] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 16 ms
+2020-11-19 12:08:57.350  INFO 7816 --- [main] c.b.j.u.a.c.UserControllerTest           : Started UserControllerTest in 4.924 seconds (JVM running for 7.971)
+2020-11-19 12:08:57.600  INFO 7816 --- [main] c.b.j.u.a.c.UserController               : get all the users is called
+2020-11-19 12:08:57.725  INFO 7816 --- [main] c.b.j.u.a.c.UserControllerTest           : actual users : [{"userId":1001,"firstName":"Nafaz","lastName":"Benzema","email":"nafazbenzema@gmail.com","country":"Sri Lanka","dob":"1997-05-01T18:00:00.000+00:00","teleNo":"+97 7 164 5162","nicOrPassport":"971230720V","registeredDate":"2020-11-19T06:38:57.444+00:00","modifiedDate":"2020-11-19T06:38:57.444+00:00"},{"userId":1002,"firstName":"Kelly","lastName":"Brook","email":"brook@hotmail.com","country":"United Kingdom","dob":"1979-10-21T18:30:00.000+00:00","teleNo":"+32 87 765 5382","nicOrPassport":"4544678633456UK","registeredDate":"2020-11-19T06:38:57.444+00:00","modifiedDate":"2020-11-19T06:38:57.444+00:00"}]
+2020-11-19 12:08:57.881  INFO 7816 --- [main] c.b.j.u.a.c.UserController               : user update is called
+2020-11-19 12:08:57.897  INFO 7816 --- [main] c.b.j.u.a.c.UserControllerTest           : actual user is {"userId":1002,"firstName":"Chopa Malli","lastName":"Brook","email":"brook@hotmail.com","country":"United Kingdom","dob":"1979-10-21T18:30:00.000+00:00","teleNo":"+32 87 765 5382","nicOrPassport":"4544678633456UK","registeredDate":"2020-11-19T06:38:57.756+00:00","modifiedDate":"2020-11-19T06:38:57.756+00:00"}
+2020-11-19 12:08:57.913  INFO 7816 --- [main] c.b.j.u.a.c.UserController               : get user is called
+2020-11-19 12:08:57.913  INFO 7816 --- [main] c.b.j.u.a.c.UserControllerTest           : actual user is : {"userId":1001,"firstName":"Nafaz","lastName":"Benzema","email":"nafazbenzema@gmail.com","country":"Sri Lanka","dob":"1997-05-01T18:00:00.000+00:00","teleNo":"+97 7 164 5162","nicOrPassport":"971230720V","registeredDate":"2020-11-19T06:38:57.913+00:00","modifiedDate":"2020-11-19T06:38:57.913+00:00"}
+2020-11-19 12:08:57.928  INFO 7816 --- [main] c.b.j.u.a.c.UserController               : user delete is called
+2020-11-19 12:08:57.944  INFO 7816 --- [main] c.b.j.u.a.c.UserControllerTest           : delete actual status is : 200
+2020-11-19 12:08:57.959  INFO 7816 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskExecutor           : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-19 12:12:26.484  INFO 128 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-11-19 12:12:26.484  INFO 128 --- [Thread-9] o.s.s.c.ThreadPoolTaskExecutor           : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-19 12:12:26.500  INFO 128 --- [Thread-9] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2020-11-19 12:12:26.891  INFO 128 --- [Thread-9] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2020-11-19 12:12:29.306  INFO 128 --- [restartedMain] c.b.j.u.a.UserInfoServiceApplication     : The following profiles are active: oracle
+2020-11-19 12:12:30.213  INFO 128 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-11-19 12:12:30.244  INFO 128 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 40ms. Found 1 JPA repository interfaces.
+2020-11-19 12:12:30.494  INFO 128 --- [restartedMain] o.s.c.c.s.GenericScope                   : BeanFactory id=85cffd4f-be6e-30fa-be49-8588e9eb6a97
+2020-11-19 12:12:30.806  INFO 128 --- [restartedMain] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 9090 (http)
+2020-11-19 12:12:30.806  INFO 128 --- [restartedMain] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2020-11-19 12:12:30.822  INFO 128 --- [restartedMain] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-11-19 12:12:30.869  INFO 128 --- [restartedMain] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2020-11-19 12:12:30.884  INFO 128 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1562 ms
+2020-11-19 12:12:31.072  INFO 128 --- [restartedMain] o.s.s.c.ThreadPoolTaskExecutor           : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-19 12:12:31.134  INFO 128 --- [task-1] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-11-19 12:12:31.134  INFO 128 --- [task-1] c.z.h.HikariDataSource                   : HikariPool-2 - Starting...
+2020-11-19 12:12:31.166  WARN 128 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-11-19 12:12:31.228  INFO 128 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 6c8df707-251c-46a3-994a-495f9bda839f
+
+2020-11-19 12:12:31.244  INFO 128 --- [restartedMain] o.s.s.w.DefaultSecurityFilterChain       : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@383ed139, org.springframework.security.web.context.SecurityContextPersistenceFilter@65278093, org.springframework.security.web.header.HeaderWriterFilter@1266c768, org.springframework.security.web.authentication.logout.LogoutFilter@6c0d9df1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6f82ce59, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4b7b1946, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@94e7bb2, org.springframework.security.web.session.SessionManagementFilter@67a33a3f, org.springframework.security.web.access.ExceptionTranslationFilter@1503f583, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@ebdebcf]
+2020-11-19 12:12:31.494  INFO 128 --- [task-1] c.z.h.p.PoolBase                         : HikariPool-2 - Driver does not support get/set network timeout for connections. (Receiver class oracle.jdbc.driver.T4CConnection does not define or inherit an implementation of the resolved method abstract getNetworkTimeout()I of interface java.sql.Connection.)
+2020-11-19 12:12:31.494  INFO 128 --- [task-1] c.z.h.HikariDataSource                   : HikariPool-2 - Start completed.
+2020-11-19 12:12:31.494  INFO 128 --- [task-1] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2020-11-19 12:12:32.072  INFO 128 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-11-19 12:12:32.783  INFO 128 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-11-19 12:12:32.799  INFO 128 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-11-19 12:12:33.158  INFO 1776 --- [main] c.b.j.u.a.c.UserControllerTest           : The following profiles are active: oracle
+2020-11-19 12:12:33.283  WARN 128 --- [restartedMain] s.o.SpringCloudSecurityAutoConfiguration : All Spring Cloud Security modules and starters are deprecated. They will be moved to individual projects in the next major release.
+2020-11-19 12:12:33.299  INFO 128 --- [restartedMain] o.s.b.a.e.w.EndpointLinksResolver        : Exposing 2 endpoint(s) beneath base path '/actuator'
+2020-11-19 12:12:33.377  INFO 128 --- [restartedMain] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 9090 (http) with context path ''
+2020-11-19 12:12:34.221  INFO 128 --- [restartedMain] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2020-11-19 12:12:34.252  INFO 128 --- [restartedMain] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2020-11-19 12:12:34.268  INFO 128 --- [restartedMain] c.b.j.u.a.UserInfoServiceApplication     : Started UserInfoServiceApplication in 7.261 seconds (JVM running for 326.325)
+2020-11-19 12:12:34.268  INFO 128 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-11-19 12:12:34.893  INFO 1776 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 3571f746-7a8a-4a0e-a6c2-b5effbd98586
+
+2020-11-19 12:12:35.033  INFO 1776 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@639cb788, org.springframework.security.web.context.SecurityContextPersistenceFilter@44ccd75c, org.springframework.security.web.header.HeaderWriterFilter@5be51aa, org.springframework.security.web.authentication.logout.LogoutFilter@2774dcf4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@566fe83c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1ffd0114, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2fee69a1, org.springframework.security.web.session.SessionManagementFilter@6121a7dd, org.springframework.security.web.access.ExceptionTranslationFilter@4d0e1a9a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5e385b6f]
+2020-11-19 12:12:35.518  INFO 1776 --- [main] o.s.s.c.ThreadPoolTaskExecutor           : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-19 12:12:35.830  INFO 1776 --- [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2020-11-19 12:12:35.830  INFO 1776 --- [main] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+2020-11-19 12:12:35.846  INFO 1776 --- [main] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 16 ms
+2020-11-19 12:12:35.877  INFO 1776 --- [main] c.b.j.u.a.c.UserControllerTest           : Started UserControllerTest in 5.059 seconds (JVM running for 8.605)
+2020-11-19 12:12:36.018  INFO 1776 --- [main] c.b.j.u.a.c.UserController               : get all the users is called
+2020-11-19 12:12:36.127  INFO 1776 --- [main] c.b.j.u.a.c.UserControllerTest           : actual users : [{"userId":1001,"firstName":"Nafaz","lastName":"Benzema","email":"nafazbenzema@gmail.com","country":"Sri Lanka","dob":"1997-05-01T18:00:00.000+00:00","teleNo":"+97 7 164 5162","nicOrPassport":"971230720V","registeredDate":"2020-11-19T06:42:35.940+00:00","modifiedDate":"2020-11-19T06:42:35.940+00:00"},{"userId":1002,"firstName":"Kelly","lastName":"Brook","email":"brook@hotmail.com","country":"United Kingdom","dob":"1979-10-21T18:30:00.000+00:00","teleNo":"+32 87 765 5382","nicOrPassport":"4544678633456UK","registeredDate":"2020-11-19T06:42:35.940+00:00","modifiedDate":"2020-11-19T06:42:35.940+00:00"}]
+2020-11-19 12:12:36.205  INFO 1776 --- [main] c.b.j.u.a.c.UserController               : user update is called
+2020-11-19 12:12:36.205  INFO 1776 --- [main] c.b.j.u.a.c.UserControllerTest           : actual user is {"userId":1002,"firstName":"Chopa Malli","lastName":"Brook","email":"brook@hotmail.com","country":"United Kingdom","dob":"1979-10-21T18:30:00.000+00:00","teleNo":"+32 87 765 5382","nicOrPassport":"4544678633456UK","registeredDate":"2020-11-19T06:42:36.158+00:00","modifiedDate":"2020-11-19T06:42:36.158+00:00"}
+2020-11-19 12:12:36.236  INFO 1776 --- [main] c.b.j.u.a.c.UserController               : get user is called
+2020-11-19 12:12:36.236  INFO 1776 --- [main] c.b.j.u.a.c.UserControllerTest           : actual user is : {"userId":1001,"firstName":"Nafaz","lastName":"Benzema","email":"nafazbenzema@gmail.com","country":"Sri Lanka","dob":"1997-05-01T18:00:00.000+00:00","teleNo":"+97 7 164 5162","nicOrPassport":"971230720V","registeredDate":"2020-11-19T06:42:36.236+00:00","modifiedDate":"2020-11-19T06:42:36.236+00:00"}
+2020-11-19 12:12:36.252  INFO 1776 --- [main] c.b.j.u.a.c.UserController               : user delete is called
+2020-11-19 12:12:36.268  INFO 1776 --- [main] c.b.j.u.a.c.UserControllerTest           : delete actual status is : 200
+2020-11-19 12:12:36.283  INFO 1776 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskExecutor           : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-19 12:13:02.949  INFO 8148 --- [main] c.b.j.u.a.s.i.UserServiceImplTest        : The following profiles are active: oracle
+2020-11-19 12:13:04.246  INFO 8148 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-11-19 12:13:04.511  INFO 8148 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 260ms. Found 1 JPA repository interfaces.
+2020-11-19 12:13:04.871  INFO 8148 --- [main] o.s.c.c.s.GenericScope                   : BeanFactory id=a7dbd0cf-75e5-3237-be37-3fef00380fc7
+2020-11-19 12:13:06.183  INFO 8148 --- [main] o.s.s.c.ThreadPoolTaskExecutor           : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-19 12:13:06.324  INFO 8148 --- [task-1] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-11-19 12:13:06.433  WARN 8148 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-11-19 12:13:06.527  INFO 8148 --- [task-1] o.h.Version                              : HHH000412: Hibernate ORM core version 5.4.22.Final
+2020-11-19 12:13:06.699  INFO 8148 --- [task-1] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-11-19 12:13:07.511  INFO 8148 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: c25d6774-e7f4-4010-9a8c-85fe6947c435
+
+2020-11-19 12:13:07.765  INFO 8148 --- [task-1] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2020-11-19 12:13:07.799  INFO 8148 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6104691c, org.springframework.security.web.context.SecurityContextPersistenceFilter@19d76106, org.springframework.security.web.header.HeaderWriterFilter@15c1b543, org.springframework.security.web.authentication.logout.LogoutFilter@4cfe9594, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@231d3ce, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@10fc1a22, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@195cbf5e, org.springframework.security.web.session.SessionManagementFilter@53df7e67, org.springframework.security.web.access.ExceptionTranslationFilter@663622b1, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@237cd264]
+2020-11-19 12:13:08.759  INFO 8148 --- [task-1] c.z.h.p.PoolBase                         : HikariPool-1 - Driver does not support get/set network timeout for connections. (Receiver class oracle.jdbc.driver.T4CConnection does not define or inherit an implementation of the resolved method abstract getNetworkTimeout()I of interface java.sql.Connection.)
+2020-11-19 12:13:08.759  INFO 8148 --- [task-1] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2020-11-19 12:13:08.790  INFO 8148 --- [task-1] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2020-11-19 12:13:10.181  INFO 8148 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-11-19 12:13:10.197  INFO 8148 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-11-19 12:13:11.243  WARN 8148 --- [main] s.o.SpringCloudSecurityAutoConfiguration : All Spring Cloud Security modules and starters are deprecated. They will be moved to individual projects in the next major release.
+2020-11-19 12:13:11.243  INFO 8148 --- [main] o.s.b.a.e.w.EndpointLinksResolver        : Exposing 2 endpoint(s) beneath base path '/actuator'
+2020-11-19 12:13:11.322  INFO 8148 --- [main] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2020-11-19 12:13:11.322  INFO 8148 --- [main] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2020-11-19 12:13:11.337  INFO 8148 --- [main] c.b.j.u.a.s.i.UserServiceImplTest        : Started UserServiceImplTest in 10.01 seconds (JVM running for 13.376)
+2020-11-19 12:13:11.431  INFO 8148 --- [main] c.b.j.u.a.s.i.UserServiceImpl            : get all the Users
+2020-11-19 12:13:11.447  INFO 8148 --- [main] c.b.j.u.a.s.i.UserServiceImpl            : get the specific User
+2020-11-19 12:13:11.462  INFO 8148 --- [main] c.b.j.u.a.s.i.UserServiceImpl            : user is deleted with 1001 and 971230720V
+2020-11-19 12:13:11.540  INFO 8148 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-11-19 12:13:11.540  INFO 8148 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskExecutor           : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-19 12:13:11.540  INFO 8148 --- [SpringContextShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2020-11-19 12:13:11.822  INFO 8148 --- [SpringContextShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.

@@ -1,0 +1,8 @@
+server:
+  port: 9098
+
+spring:
+  application:
+    name: authorization-server
+  profiles:
+    active: oracle

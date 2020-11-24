@@ -2,5 +2,13 @@ server:
   port: 9090
 
 spring:
+  application:
+    name: user-info-service
   profiles:
     active: oracle
+
+logging:
+  file:
+    name: "D:/Spring Boot Project/project-jibra/user-info-service/user-info-logger.log"
+  level:
+    root: info
