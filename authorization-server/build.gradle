@@ -4,6 +4,7 @@ plugins {
     id 'java'
     id 'maven'
     id 'eclipse'
+    id 'idea'
 }
 
 group = 'com.benz.authorization.server'
@@ -14,6 +15,11 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+}
+
+bootJar{
+    archivesBaseName='authorization-server'
+    archiveFileName = 'authorization-server.jar'
 }
 
 repositories {
@@ -45,7 +51,6 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     compile group: 'com.oracle', name: 'ojdbc6', version: '11.2.0.4'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-
 
 }
 
