@@ -1,1 +1,10 @@
+server:
+  port: 9097
+
+spring:
+  application:
+    name: web-portal
+  profiles:
+    active: dev
+
 

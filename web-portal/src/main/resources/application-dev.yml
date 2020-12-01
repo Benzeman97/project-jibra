@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: "jdbc:oracle:thin:@localhost:1521:orcl"
+    username: SECURITYDB
+    password: 14292
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: validate
+
+security:
+  oauth2:
+    access-token-uri: http://localhost:9098/oauth/token
+    client-id: web
+    client-secret: 14292
+    grant-type: password
+

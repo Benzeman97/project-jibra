@@ -1,4 +1,4 @@
-package com.benz.jibra.portal.web.payload.response;
+package com.benz.jibra.portal.web.payload.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UserResponse {
+public class LoginRequest {
 
-    private String email;
-    private String access_token;
+    private String userName;
+    private String password;
 }

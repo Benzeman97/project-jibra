@@ -1,4 +1,4 @@
-package com.benz.jibra.portal.web.payload.response;
+package com.benz.jibra.portal.web.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UserResponse {
+public class ErrorMessage {
 
-    private String email;
-    private String access_token;
+    private int status;
+    private String errorMsg;
+    private String documentation;
 }

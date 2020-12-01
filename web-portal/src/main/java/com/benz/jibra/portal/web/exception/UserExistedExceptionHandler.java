@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class DataNotFoundExceptionHandler {
+public class UserExistedExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<ErrorMessage> toResponse(DataNotFoundException dx)
-    {
-        ErrorMessage errorMessage=new ErrorMessage(HttpStatus.NOT_FOUND.value(),dx.getMessage(),"www.benz.com");
-        return new ResponseEntity<>(errorMessage,HttpStatus.NOT_FOUND);
+    public ResponseEntity<ErrorMessage> toResponse(UserExistedException ux) {
+        ErrorMessage errorMessage = new ErrorMessage(409, ux.getMessage(), "www.benz.com");
+        return new ResponseEntity<>(errorMessage, HttpStatus.CONFLICT);
     }
+
 }
