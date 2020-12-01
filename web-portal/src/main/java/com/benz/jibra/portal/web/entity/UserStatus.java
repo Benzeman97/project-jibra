@@ -19,13 +19,13 @@ public class UserStatus {
     @Column(name = "STATUS_ID")
     private long statusId;
     @Column(name = "ACTIVE")
-    private long active;
+    private Long active;
     @Column(name = "ACC_NON_EXPIRED")
-    private long accNonExpired;
+    private Long accNonExpired;
     @Column(name = "CREDENTIAL_NON_EXPIRED")
-    private long credentialNonExpired;
+    private Long credentialNonExpired;
     @Column(name = "ACC_NON_LOCKED")
-    private long accNonLocked;
+    private Long accNonLocked;
 
 
 }

@@ -1,6 +1,7 @@
 package com.benz.authorization.server.api.entity;
 
 import com.benz.authorization.server.api.db.Schema;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +19,8 @@ import java.util.Set;
 public class User {
 
     @Id
+    @SequenceGenerator(name = "USER_ID_GEN", sequenceName = Schema.USERDB + ".USER_ID_SEQ", initialValue = 56001, allocationSize = 1)
+    @GeneratedValue(generator = "USER_ID_GEN", strategy = GenerationType.SEQUENCE)
     @Column(name = "USER_ID")
     private long userId;
     @Column(name = "FIRST_NAME",nullable = false)
@@ -42,7 +45,7 @@ public class User {
     @Column(name = "MODIFIED_DATE")
     private Date modifiedDate;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = UserStatus.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "STATUS_ID",referencedColumnName = "STATUS_ID")
     private UserStatus userStatus;
 
