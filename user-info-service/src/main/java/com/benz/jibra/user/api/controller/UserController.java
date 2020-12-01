@@ -1,6 +1,8 @@
 package com.benz.jibra.user.api.controller;
 
+import com.benz.jibra.user.api.dao.UserDAO;
 import com.benz.jibra.user.api.entity.User;
+import com.benz.jibra.user.api.entity.UserStatus;
 import com.benz.jibra.user.api.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -21,9 +24,10 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService,UserDAO userDAO) {
         this.userService = userService;
     }
+
 
     @GetMapping(value = "/one", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<User> getUser(@RequestBody User user) {

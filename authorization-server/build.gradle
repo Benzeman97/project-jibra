@@ -2,8 +2,9 @@ plugins {
     id 'org.springframework.boot' version '2.4.0'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
-    id 'maven'
+    id 'maven-publish'
     id 'eclipse'
+    id 'idea'
 }
 
 group = 'com.benz.authorization.server'
@@ -16,6 +17,11 @@ configurations {
     }
 }
 
+bootJar{
+    archivesBaseName='authorization-server'
+    archiveFileName = 'authorization-server.jar'
+}
+
 repositories {
 
     mavenCentral()
@@ -26,6 +32,30 @@ repositories {
     }
 
 }
+
+/*
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            pom {
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'johnd'
+                        name = 'John Doe'
+                        email = 'john.doe@example.com'
+                    }
+                }
+            }
+        }
+    }
+}
+*/
 
 ext {
     set('springCloudVersion', "2020.0.0-SNAPSHOT")
@@ -45,7 +75,6 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     compile group: 'com.oracle', name: 'ojdbc6', version: '11.2.0.4'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-
 
 }
 

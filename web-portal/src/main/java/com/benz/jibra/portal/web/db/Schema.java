@@ -1,6 +1,6 @@
-package com.benz.jibra.user.api.db;
+package com.benz.jibra.portal.web.db;
 
-public class Schema {
+public final class Schema {
 
     final public static String USERDB = "USERDB";
     final public static String SECURITYDB = "SECURITYDB";

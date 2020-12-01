@@ -5,4 +5,8 @@ spring:
   application:
     name: authorization-server
   profiles:
-    active: oracle
+    active: dev
+
+
+
+

@@ -1,11 +1,10 @@
-package com.benz.authorization.server.api.entity;
+package com.benz.jibra.portal.web.entity;
 
-import com.benz.authorization.server.api.db.Schema;
+import com.benz.jibra.portal.web.db.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "USER_STATUS", schema = Schema.SECURITYDB)
