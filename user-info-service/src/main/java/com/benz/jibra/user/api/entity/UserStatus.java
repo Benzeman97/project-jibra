@@ -1,11 +1,10 @@
-package com.benz.authorization.server.api.entity;
+package com.benz.jibra.user.api.entity;
 
-import com.benz.authorization.server.api.db.Schema;
+import com.benz.jibra.user.api.db.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "USER_STATUS", schema = Schema.SECURITYDB)
@@ -19,13 +18,13 @@ public class UserStatus {
     @Column(name = "STATUS_ID")
     private long statusId;
     @Column(name = "ACTIVE")
-    private Long active;
+    private long active;
     @Column(name = "ACC_NON_EXPIRED")
-    private Long accNonExpired;
+    private long accNonExpired;
     @Column(name = "CREDENTIAL_NON_EXPIRED")
-    private Long credentialNonExpired;
+    private long credentialNonExpired;
     @Column(name = "ACC_NON_LOCKED")
-    private Long accNonLocked;
+    private long accNonLocked;
 
 
 }

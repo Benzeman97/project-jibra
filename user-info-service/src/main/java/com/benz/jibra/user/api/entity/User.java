@@ -51,5 +51,9 @@ public class User {
     @Column(name = "MODIFIED_DaTE")
     private Date modifiedDate;
 
+    @OneToOne(targetEntity = UserStatus.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "STATUS_ID",referencedColumnName = "STATUS_ID")
+    private UserStatus userStatus;
+
 }
 
