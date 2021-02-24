@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:orcl
+    username: TESTDB
+    password: 14292
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update
+
+
+security:
+  jwt:
+    key-store: classpath:jwt-security-app.jks
+    key-store-password: 14292Peo
+    key-pair-alias: jwt
+    key-pair-password: 14292Peo
+  oauth2:
+      access-token-uri: http://localhost:9090/oauth/token
+      client-id: web
+      client-secret: webadmin
+      grant-type: password
