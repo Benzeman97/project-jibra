@@ -1,11 +1,6 @@
 package com.benz.security.web.api.controller;
 
 import com.benz.security.web.api.dao.UserDAO;
-import com.benz.security.web.api.db.EPermission;
-import com.benz.security.web.api.db.ERole;
-import com.benz.security.web.api.entity.Permission;
-import com.benz.security.web.api.entity.Role;
-import com.benz.security.web.api.entity.User;
 import com.benz.security.web.api.payload.request.LoginRequest;
 import com.benz.security.web.api.payload.request.SignupRequest;
 import com.benz.security.web.api.payload.response.Response;
@@ -15,11 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @CrossOrigin(origins = "*",maxAge = 3600L)
 @RestController
@@ -57,6 +48,13 @@ public class AuthenticationController {
           }
           LOGGER.error("username,email and password are required");
           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/test")
+    public String demo()
+    {
+        System.out.println("Hallo,ich hisBe Nafaz");
+        return "Hello Benzema";
     }
 
 
