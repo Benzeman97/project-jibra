@@ -4,7 +4,7 @@ implemented authorization_code flow grant type with spring security and spring c
 Working flow
 -------------------
 
-http://127.0.0.1:8888/code ------------------>  http://127.0.0.1:9090/oauth/authorize (you have to provide client_id and response_type as paramas)
+http://127.0.0.1:8888/code ------------------>  http://127.0.0.1:9090/oauth/authorize ( you have to provide client_id and response_type as paramas )
 
 ----------------> http://127.0.0.1:9090/login (for authentication with authorization server)
 
