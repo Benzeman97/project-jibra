@@ -4,11 +4,13 @@ implemented authorization_code flow grant type with spring security and spring c
 Working flow
 -------------------
 
-http://127.0.0.1:8888/code ---------->  http://127.0.0.1:9090/oauth/authorize (you have to provide client_id and response_type as paramas)
+http://127.0.0.1:8888/code ------------------>  http://127.0.0.1:9090/oauth/authorize (you have to provide client_id and response_type as paramas)
 
----------------> http://127.0.0.1:9090/login (for authentication with authorization server) ------------>  http://127.0.0.1:9090/oauth/authorize (again redirect to get authorization) 
+----------------> http://127.0.0.1:9090/login (for authentication with authorization server)
 
------------------> http://127.0.0.1:8888/private?code=5u3Pbk (authorization token is provided by authorization server)  ---------- redirect to ---------
+---------->   http://127.0.0.1:9090/oauth/authorize ( Authorize or Deny ) ------------- If Authorize ----------
+
+-----------------> http://127.0.0.1:8888/private?code=5u3Pbk (authorization token is provided by authorization server) 
 
 -----------------> http://127.0.0.1:9090/oauth/token?code=5u3Pbk&grant_type=authorization_code (to get access token) 
 
