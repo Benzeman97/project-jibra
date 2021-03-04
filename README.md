@@ -8,8 +8,8 @@ http://127.0.0.1:8888/code ---------->  http://127.0.0.1:9090/oauth/authorize (y
 
 ---------------> http://127.0.0.1:9090/login (for authentication with authorization server) ------------>  http://127.0.0.1:9090/oauth/authorize (again redirect to get authorization)
 
------------------> http://127.0.0.1:8888/private?code=#gs&89s (authorization token is provided by authorization server)  ----------- redirect to -------------
+-----------------> http://127.0.0.1:8888/private?code=5u3Pbk (authorization token is provided by authorization server)  ----------- redirect to -------------
 
------------------> http://127.0.0.1:9090/oauth/token?code=#gs&89s&grant_type=authorization_code (to get access token) 
+-----------------> http://127.0.0.1:9090/oauth/token?code=5u3Pbk&grant_type=authorization_code (to get access token) 
 
 ----------------> http://127.0.0.1:9098/admin?Authorization = bearer "access-token as JWT" ( request to the resource server with access token )
