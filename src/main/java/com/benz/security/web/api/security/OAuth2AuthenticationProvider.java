@@ -23,6 +23,7 @@ public class OAuth2AuthenticationProvider {
 
     public OAuth2AccessToken obtainToken(String username,String password)
     {
+
         SecurityProperties.OAuth2Properties oAuth2Properties = securityProperties.getOauth2();
 
         ResourceOwnerPasswordResourceDetails resourceDetails = new ResourceOwnerPasswordResourceDetails();

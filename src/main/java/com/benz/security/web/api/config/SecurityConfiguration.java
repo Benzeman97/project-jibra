@@ -9,7 +9,6 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -53,12 +52,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                  .antMatchers("/user/**").hasAnyRole("USER","ADMIN")
                 .antMatchers("/**").permitAll().and().formLogin();*/
 
-       http.csrf().disable().exceptionHandling()
-               .and().authorizeRequests().anyRequest().permitAll().and().formLogin();
 
+     /*  http.csrf().disable().exceptionHandling()
+               .and().authorizeRequests().anyRequest().permitAll().and().formLogin();
+*/
        // use AuthEntryPoint with password and client_credentials flow
 
-     //  http.exceptionHandling().authenticationEntryPoint(authEntryPoint);
+        http.csrf().disable().exceptionHandling().authenticationEntryPoint(authEntryPoint)
+                .and().authorizeRequests().anyRequest().permitAll();
 
        //formLogin() is enabled for authorization_code flow
     }

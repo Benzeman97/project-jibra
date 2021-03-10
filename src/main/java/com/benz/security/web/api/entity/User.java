@@ -36,7 +36,7 @@ public class User {
     @Column(name = "ACC_NON_LOCKED")
     private String accNonLocked;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinTable(name = "USER_ROLE",joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")},
     inverseJoinColumns = {@JoinColumn(name = "ROLE_ID",referencedColumnName = "ID")})
     private Set<Role> roles;

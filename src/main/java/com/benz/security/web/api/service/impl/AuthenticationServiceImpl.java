@@ -52,7 +52,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
            if(login.getUserName().equals(user.getEmail()) && BCrypt.checkpw(login.getPassword(),hashPwd)) {
                LOGGER.info("Login success");
-               return new Response(user.getEmail(), authenticationProvider.obtainToken(login.getUserName(), login.getPassword()).toString());
+               return new Response(user.getEmail(), authenticationProvider.obtainToken(user.getEmail(), login.getPassword()).toString());
            }
            LOGGER.error("Invalid Credentials");
            throw new BadCredentialsException("Invalid Credentials");
@@ -60,6 +60,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public Response userRegistration(SignupRequest signup) {
+
 
         if(!Objects.isNull(userDAO.findUserByEmail(signup.getEmail()).orElse(null)))
             throw new UserIsExistedException(String.format("User is existed with %s",signup.getEmail()));
@@ -81,36 +82,36 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             user.setAccNonLocked("y");
             user.setRoles(signup.getRoles());
 
-            Set<Role> roles = new HashSet<>();
+
+           Set<Role> roles = new HashSet<>();
 
             user.getRoles().forEach(role->{
                  roles.add(role);
+              //  Set<Permission> permissions=new HashSet<>();
 
-                Set<Permission> permissions=new HashSet<>();
-
-                role.getPermissions().forEach(perm->{
+                /*role.getPermissions().forEach(perm->{
                     permissions.add(perm);
                 });
 
-                role.setPermissions(permissions);
+                role.setPermissions(permissions);*/
 
             });
 
-            user.setRoles(roles);
+           user.setRoles(roles);
 
-            userDAO.save(user);
+           userDAO.save(user);
 
 
             LOGGER.info("user is saved and response is returned successfully");
-           return new Response(user.getEmail(), authenticationProvider.obtainToken(user.getEmail(), user.getPassword()).toString());
+           return new Response(user.getEmail(), authenticationProvider.obtainToken(user.getEmail(), signup.getPassword()).toString());
 
         }catch (NumberFormatException ex){
             LOGGER.error("NumberFormat Exception");
             throw new NumberFormatException("NumberFormat Exception");
         }
-        catch (Exception ex){
+      /*  catch (Exception ex){
             LOGGER.error("invalid username or password");
            throw new BadCredentialsException("invalid username or password",ex);
-        }
+        }*/
     }
 }

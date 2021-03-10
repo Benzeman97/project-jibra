@@ -24,8 +24,8 @@ public class Role {
     private ERole name;
 
     // bi-directional
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private Set<User> users;
+   /* @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "roles")
+    private Set<User> users;*/
 
     // uni-directional
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
