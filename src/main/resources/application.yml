@@ -1,0 +1,8 @@
+server:
+  port: 9094
+
+spring:
+  application:
+    name: movie-info-service
+  profiles:
+    active: dev

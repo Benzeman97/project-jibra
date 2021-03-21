@@ -2,6 +2,9 @@ plugins {
 	id 'org.springframework.boot' version '2.3.9.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'maven-publish'
+	id 'idea'
+	id 'eclipse'
 }
 
 group = 'com.benz.movie.info'
@@ -14,8 +17,34 @@ configurations {
 	}
 }
 
+configurations.all{
+	exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+}
+
+
+publishing {
+			publications {
+				mavenJava(MavenPublication) {
+					pom {
+						developers {
+							developer {
+								id = 'benz'
+								name = 'Nafaz Benzema'
+								email = 'nafazbenzema@gmail.com'
+							}
+						}
+					}
+				}
+			}
+}
+
+
+
 repositories {
 	mavenCentral()
+	maven{
+		url 'D:/Build Tools/.m2/repository'
+	}
 }
 
 ext {
@@ -23,9 +52,12 @@ ext {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+	implementation group: 'com.oracle', name: 'ojdbc6', version: '11.2.0.4'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
 	compileOnly 'org.projectlombok:lombok'
@@ -43,6 +75,11 @@ dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
+}
+
+bootJar{
+	archivesBaseName='movie-info-service'
+	archiveFileName='movie-info-service.jar'
 }
 
 test {
