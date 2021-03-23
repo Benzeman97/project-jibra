@@ -7,5 +7,8 @@ import java.util.List;
 public interface MovieInfoService {
 
     List<Movie> getMovieInfo();
-    Movie getMovieInfo(String movieId);
+    Movie findMovieInfo(String movieId);
+    Movie saveMovieInfo(Movie movie);
+    Movie updateMovieInfo(String movieId,Movie movie);
+    void deleteMovieInfo(String movieId);
 }

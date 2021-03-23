@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
@@ -40,7 +41,7 @@ public class Movie {
     @Column(name = "TYPE",nullable = false)
     private String type;
     @Column(name = "RELEASED_DATE",nullable = false)
-    private Date releasedDate;
+    private LocalDate releasedDate;
     @Column(name = "DIRECTOR")
     private String director;
 
