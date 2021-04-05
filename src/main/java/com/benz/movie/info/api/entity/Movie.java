@@ -29,7 +29,7 @@ public class Movie {
     @Column(name = "CATEGORY",nullable = false)
     private String category;
     @Column(name = "PRICE",nullable = false)
-    private long price;
+    private double price;
     @Column(name = "LANGUAGE",nullable = false)
     private String language;
     @Column(name = "CAST")
@@ -45,7 +45,8 @@ public class Movie {
     @Column(name = "DIRECTOR")
     private String director;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "movie")
+    @OneToMany(targetEntity = Schedule.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "MOVIE_ID",referencedColumnName = "MOVIE_ID")
     private Set<Schedule> schedule;
 
 }

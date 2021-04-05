@@ -2,13 +2,18 @@ package com.benz.movie.info.api.service.impl;
 
 import com.benz.movie.info.api.dao.MovieInfoDao;
 import com.benz.movie.info.api.entity.Movie;
+import com.benz.movie.info.api.entity.Schedule;
 import com.benz.movie.info.api.exception.DataNotFoundException;
 import com.benz.movie.info.api.exception.MovieExistedException;
 import com.benz.movie.info.api.service.MovieInfoService;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieInfoServiceImpl implements MovieInfoService {
@@ -42,7 +47,7 @@ public class MovieInfoServiceImpl implements MovieInfoService {
 
         if(Objects.nonNull(mov))
                throw new MovieExistedException(String.format("Movie is existed with id %s",mov.getMovieId()));
-        return movieInfoDao.save(movie);
+       return movieInfoDao.save(movie);
 
     }
 
