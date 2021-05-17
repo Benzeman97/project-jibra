@@ -48,7 +48,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().exceptionHandling().authenticationEntryPoint(authEntryPoint)
-                .and().authorizeRequests().anyRequest().authenticated();
+                .and().authorizeRequests().antMatchers("/auth/**").permitAll().
+        and().authorizeRequests().anyRequest().authenticated();
         //authorization is implemented
     }
 

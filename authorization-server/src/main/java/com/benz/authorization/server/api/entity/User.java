@@ -47,12 +47,13 @@ public class User {
 
     @OneToOne(targetEntity = UserStatus.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "STATUS_ID",referencedColumnName = "STATUS_ID")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private UserStatus userStatus;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinTable(name = "ROLE_USER",
     joinColumns = {@JoinColumn(name = "USER_ID",referencedColumnName = "USER_ID"),
-            @JoinColumn(name = "NIC_OR_PASSPORT",referencedColumnName = "NiC_OR_PASSPORT")},
+            @JoinColumn(name = "NIC_OR_PASSPORT",referencedColumnName = "NIC_OR_PASSPORT")},
     inverseJoinColumns = {@JoinColumn(name = "ROLE_ID",referencedColumnName = "ID")})
     private Set<Role> roles;
 

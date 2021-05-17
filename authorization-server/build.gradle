@@ -17,6 +17,10 @@ configurations {
     }
 }
 
+configurations.all {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+}
+
 bootJar{
     archivesBaseName='authorization-server'
     archiveFileName = 'authorization-server.jar'
@@ -33,7 +37,6 @@ repositories {
 
 }
 
-/*
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -46,27 +49,24 @@ publishing {
                 }
                 developers {
                     developer {
-                        id = 'johnd'
-                        name = 'John Doe'
-                        email = 'john.doe@example.com'
+                        name = 'Nafaz Benzema'
+                        email = 'nafazbenzema@gmail.com'
                     }
                 }
             }
         }
     }
 }
-*/
 
 ext {
     set('springCloudVersion', "2020.0.0-SNAPSHOT")
 }
 
 dependencies {
-    implementation ('org.springframework.boot:spring-boot-starter-security'){
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-    }
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
+    implementation 'org.springframework.cloud:spring-cloud-starter-oauth2:2.2.4.RELEASE'
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-security', version: '3.0.0-M6'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
@@ -75,6 +75,8 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     compile group: 'com.oracle', name: 'ojdbc6', version: '11.2.0.4'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+
 
 }
 

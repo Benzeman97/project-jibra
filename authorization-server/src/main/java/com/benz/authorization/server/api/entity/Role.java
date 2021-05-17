@@ -22,7 +22,7 @@ public class Role {
     @Column(name = "NAME")
     private ERole name;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinTable(name = "PERMISSION_ROLE",
     joinColumns={@JoinColumn(name = "ROLE_ID",referencedColumnName = "ID")},
     inverseJoinColumns = {@JoinColumn(name = "PERMISSION_ID",referencedColumnName = "ID")})

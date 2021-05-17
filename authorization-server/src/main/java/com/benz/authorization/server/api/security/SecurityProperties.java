@@ -8,6 +8,7 @@ import org.springframework.core.io.Resource;
 public class SecurityProperties {
 
     private JwtProperties jwt;
+    private OAuth2Properties auth;
 
     public JwtProperties getJwt() {
         return jwt;
@@ -15,6 +16,14 @@ public class SecurityProperties {
 
     public void setJwt(JwtProperties jwt) {
         this.jwt = jwt;
+    }
+
+    public OAuth2Properties getAuth() {
+        return auth;
+    }
+
+    public void setAuth(OAuth2Properties auth) {
+        this.auth = auth;
     }
 
     public static class JwtProperties{
@@ -54,6 +63,46 @@ public class SecurityProperties {
 
         public void setKeyPairPassword(String keyPairPassword) {
             this.keyPairPassword = keyPairPassword;
+        }
+    }
+
+    public static class OAuth2Properties{
+
+        private String accessTokenUri;
+        private String clientId;
+        private String clientSecret;
+        private String grantType;
+
+        public String getAccessTokenUri() {
+            return accessTokenUri;
+        }
+
+        public void setAccessTokenUri(String accessTokenUri) {
+            this.accessTokenUri = accessTokenUri;
+        }
+
+        public String getClientId() {
+            return clientId;
+        }
+
+        public void setClientId(String clientId) {
+            this.clientId = clientId;
+        }
+
+        public String getClientSecret() {
+            return clientSecret;
+        }
+
+        public void setClientSecret(String clientSecret) {
+            this.clientSecret = clientSecret;
+        }
+
+        public String getGrantType() {
+            return grantType;
+        }
+
+        public void setGrantType(String grantType) {
+            this.grantType = grantType;
         }
     }
 }
