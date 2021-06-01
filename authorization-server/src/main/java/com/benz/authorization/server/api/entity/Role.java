@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "ROLE",schema = Schema.SECURITYDB)
+@Table(name = "ROLE", schema = Schema.SECURITYDB)
 @Getter
 @Setter
 public class Role {
@@ -22,9 +22,9 @@ public class Role {
     @Column(name = "NAME")
     private ERole name;
 
-    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "PERMISSION_ROLE",
-    joinColumns={@JoinColumn(name = "ROLE_ID",referencedColumnName = "ID")},
-    inverseJoinColumns = {@JoinColumn(name = "PERMISSION_ID",referencedColumnName = "ID")})
+            joinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "PERMISSION_ID", referencedColumnName = "ID")})
     private Set<Permission> permissions;
 }

@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.4.0'
+    id 'org.springframework.boot' version '2.4.6'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
     id 'maven-publish'
@@ -21,19 +21,19 @@ configurations.all {
     exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
 }
 
-bootJar{
-    archivesBaseName='authorization-server'
+bootJar {
+    archivesBaseName = 'authorization-server'
     archiveFileName = 'authorization-server.jar'
 }
 
 repositories {
 
     mavenCentral()
+    maven {
+        url 'D://Build Tools/.m2/repository'
+    }
     maven { url 'https://repo.spring.io/snapshot' }
     maven { url 'https://repo.spring.io/milestone' }
-    maven {
-        url 'D:/Build Tools/.m2/repository'
-    }
 
 }
 
@@ -65,16 +65,15 @@ ext {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.cloud:spring-cloud-starter-oauth2:2.2.4.RELEASE'
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-security', version: '3.0.0-M6'
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-oauth2', version: '2.2.5.RELEASE'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-    compile group: 'com.oracle', name: 'ojdbc6', version: '11.2.0.4'
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation group: 'com.oracle', name: 'ojdbc6', version: '11.2.0.4'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
 
 

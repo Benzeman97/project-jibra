@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface OAuthClientDAO extends JpaRepository<OauthClientDetails,String> {
+public interface OAuthClientDAO extends JpaRepository<OauthClientDetails, String> {
 
     Optional<OauthClientDetails> findByClientId(String clientId);
 }

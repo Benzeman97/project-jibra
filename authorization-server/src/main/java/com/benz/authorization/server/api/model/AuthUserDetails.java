@@ -20,34 +20,32 @@ public class AuthUserDetails implements UserDetails {
     private boolean credentialNonExpired;
     private boolean active;
 
-    public AuthUserDetails(boolean active,List<GrantedAuthority> authorities,String username,boolean accNonExpired,
-                           boolean accNonLocked,String password,boolean credentialNonExpired)
-    {
-        this.username=username;
-        this.password=password;
-        this.authorities=authorities;
-        this.accNonExpired=accNonExpired;
-        this.accNonLocked=accNonLocked;
-        this.credentialNonExpired=credentialNonExpired;
-        this.active=active;
+    public AuthUserDetails(boolean active, List<GrantedAuthority> authorities, String username, boolean accNonExpired,
+                           boolean accNonLocked, String password, boolean credentialNonExpired) {
+        this.username = username;
+        this.password = password;
+        this.authorities = authorities;
+        this.accNonExpired = accNonExpired;
+        this.accNonLocked = accNonLocked;
+        this.credentialNonExpired = credentialNonExpired;
+        this.active = active;
     }
 
-    public static UserDetails builder(User user)
-    {
-        List<GrantedAuthority> grantedAuthorities=new ArrayList<>();
+    public static UserDetails builder(User user) {
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
-        user.getRoles().forEach(role->{
-               grantedAuthorities.add(new SimpleGrantedAuthority(role.getName().name()));
+        user.getRoles().forEach(role -> {
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName().name()));
 
-               role.getPermissions().forEach(perm->{
-                   grantedAuthorities.add(new SimpleGrantedAuthority(perm.getName().name()));
-               });
+            role.getPermissions().forEach(perm -> {
+                grantedAuthorities.add(new SimpleGrantedAuthority(perm.getName().name()));
+            });
         });
 
         UserStatus userStatus = user.getUserStatus();
 
-        return new AuthUserDetails((userStatus.getActive()==1),grantedAuthorities,user.getEmail(),(userStatus.getAccNonExpired()==1),
-                (userStatus.getAccNonLocked()==1),user.getPassword(),(userStatus.getCredentialNonExpired()==1));
+        return new AuthUserDetails((userStatus.getActive() == 1), grantedAuthorities, user.getEmail(), (userStatus.getAccNonExpired() == 1),
+                (userStatus.getAccNonLocked() == 1), user.getPassword(), (userStatus.getCredentialNonExpired() == 1));
     }
 
     @Override

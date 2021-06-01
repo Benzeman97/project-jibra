@@ -8,5 +8,6 @@ import com.benz.authorization.server.api.payload.response.SignUpResponse;
 public interface AuthenticationService {
 
     SignUpResponse userSignUp(SignUpRequest signUpRequest) throws Exception;
+
     LogInResponse userLogIn(LogInRequest logInRequest) throws Exception;
 }

@@ -37,22 +37,21 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private SecurityProperties securityProperties;
     private TokenStore tokenStore;
 
-    public AuthorizationServerConfig(DataSource dataSource,PasswordEncoder passwordEncoder,
-                                     AuthenticationManager authenticationManager,UserDetailsService userDetailsService,
-                                     SecurityProperties securityProperties)
-    {
-        this.dataSource=dataSource;
-        this.passwordEncoder=passwordEncoder;
-        this.authenticationManager=authenticationManager;
-        this.userDetailsService=userDetailsService;
-        this.securityProperties=securityProperties;
+    public AuthorizationServerConfig(DataSource dataSource, PasswordEncoder passwordEncoder,
+                                     AuthenticationManager authenticationManager, UserDetailsService userDetailsService,
+                                     SecurityProperties securityProperties) {
+        this.dataSource = dataSource;
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
+        this.securityProperties = securityProperties;
     }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-         //security.checkTokenAccess("permitAll()").tokenKeyAccess("permitAll()");
+        //security.checkTokenAccess("permitAll()").tokenKeyAccess("permitAll()");
         security.checkTokenAccess("isAuthenticated()").tokenKeyAccess("isAuthenticated()");
-         //in Production, you have to make both as isAuthenticated()
+        //in Production, you have to make both as isAuthenticated()
     }
 
 
@@ -65,30 +64,27 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService)
-        .exceptionTranslator(exception->{
-            if(exception instanceof OAuth2Exception)
-            {
-                OAuth2Exception oAuth2Exception=(OAuth2Exception) exception;
-                return ResponseEntity.status(oAuth2Exception.getHttpErrorCode())
-                        .body(new CustomOAuthException(oAuth2Exception.getMessage()));
-            }else
-                throw exception;
-        }).accessTokenConverter(jwtAccessTokenConverter())
+                .exceptionTranslator(exception -> {
+                    if (exception instanceof OAuth2Exception) {
+                        OAuth2Exception oAuth2Exception = (OAuth2Exception) exception;
+                        return ResponseEntity.status(oAuth2Exception.getHttpErrorCode())
+                                .body(new CustomOAuthException(oAuth2Exception.getMessage()));
+                    } else
+                        throw exception;
+                }).accessTokenConverter(jwtAccessTokenConverter())
                 .tokenStore(tokenStore());
     }
 
     @Bean
-    public TokenStore tokenStore()
-    {
-          if(tokenStore==null)
-              tokenStore = new JwtTokenStore(jwtAccessTokenConverter());
-          return tokenStore;
+    public TokenStore tokenStore() {
+        if (tokenStore == null)
+            tokenStore = new JwtTokenStore(jwtAccessTokenConverter());
+        return tokenStore;
     }
 
     @Bean
-    public DefaultTokenServices defaultTokenServices(TokenStore tokenStore,ClientDetailsService clientDetailsService)
-    {
-        DefaultTokenServices tokenServices=new DefaultTokenServices();
+    public DefaultTokenServices defaultTokenServices(TokenStore tokenStore, ClientDetailsService clientDetailsService) {
+        DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setReuseRefreshToken(true);
         tokenServices.setTokenStore(tokenStore);
         tokenServices.setClientDetailsService(clientDetailsService);
@@ -97,26 +93,23 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     @Bean
-    public JwtAccessTokenConverter jwtAccessTokenConverter()
-    {
-        SecurityProperties.JwtProperties jwtProperties =securityProperties.getJwt();
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        SecurityProperties.JwtProperties jwtProperties = securityProperties.getJwt();
 
-        KeyPair keyPair = keyPair(jwtProperties,keyStoreKeyFactory(jwtProperties));
+        KeyPair keyPair = keyPair(jwtProperties, keyStoreKeyFactory(jwtProperties));
 
-        JwtAccessTokenConverter accessTokenConverter=new JwtAccessTokenConverter();
+        JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
 
         accessTokenConverter.setKeyPair(keyPair);
 
         return accessTokenConverter;
     }
 
-    private KeyPair keyPair(SecurityProperties.JwtProperties jwtProperties, KeyStoreKeyFactory keyStoreKeyFactory)
-    {
-        return keyStoreKeyFactory.getKeyPair(jwtProperties.getKeyPairAlias(),jwtProperties.getKeyPairPassword().toCharArray());
+    private KeyPair keyPair(SecurityProperties.JwtProperties jwtProperties, KeyStoreKeyFactory keyStoreKeyFactory) {
+        return keyStoreKeyFactory.getKeyPair(jwtProperties.getKeyPairAlias(), jwtProperties.getKeyPairPassword().toCharArray());
     }
 
-    private KeyStoreKeyFactory keyStoreKeyFactory(SecurityProperties.JwtProperties jwtProperties)
-    {
-      return new KeyStoreKeyFactory(jwtProperties.getKeyStore(),jwtProperties.getKeyStorePassword().toCharArray());
+    private KeyStoreKeyFactory keyStoreKeyFactory(SecurityProperties.JwtProperties jwtProperties) {
+        return new KeyStoreKeyFactory(jwtProperties.getKeyStore(), jwtProperties.getKeyStorePassword().toCharArray());
     }
 }

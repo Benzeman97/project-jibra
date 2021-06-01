@@ -8,8 +8,8 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "PERMISSION",schema = Schema.SECURITYDB,uniqueConstraints = {
-        @UniqueConstraint(name = "name",columnNames = "NAME")
+@Table(name = "PERMISSION", schema = Schema.SECURITYDB, uniqueConstraints = {
+        @UniqueConstraint(name = "name", columnNames = "NAME")
 })
 @Getter
 @Setter

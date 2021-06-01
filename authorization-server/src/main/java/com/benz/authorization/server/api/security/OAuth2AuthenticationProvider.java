@@ -16,29 +16,28 @@ public class OAuth2AuthenticationProvider {
 
     private SecurityProperties securityProperties;
 
-    public OAuth2AuthenticationProvider(SecurityProperties securityProperties){
-        this.securityProperties=securityProperties;
+    public OAuth2AuthenticationProvider(SecurityProperties securityProperties) {
+        this.securityProperties = securityProperties;
     }
 
-    public OAuth2AccessToken obtainToken(String username,String password)
-    {
-            SecurityProperties.OAuth2Properties oauth = securityProperties.getAuth();
+    public OAuth2AccessToken obtainToken(String username, String password) {
+        SecurityProperties.OAuth2Properties oauth = securityProperties.getAuth();
 
-        ResourceOwnerPasswordResourceDetails resourceDetails=new ResourceOwnerPasswordResourceDetails();
+        ResourceOwnerPasswordResourceDetails resourceDetails = new ResourceOwnerPasswordResourceDetails();
         resourceDetails.setAccessTokenUri(oauth.getAccessTokenUri());
         resourceDetails.setClientId(oauth.getClientId());
         resourceDetails.setClientSecret(oauth.getClientSecret());
         resourceDetails.setUsername(username);
         resourceDetails.setPassword(password);
 
-        DefaultAccessTokenRequest accessTokenRequest=new DefaultAccessTokenRequest();
+        DefaultAccessTokenRequest accessTokenRequest = new DefaultAccessTokenRequest();
 
-        OAuth2AccessToken accessToken=null;
+        OAuth2AccessToken accessToken = null;
 
-        try{
-               accessToken = new ResourceOwnerPasswordAccessTokenProvider().obtainAccessToken(resourceDetails,accessTokenRequest);
-        }catch (OAuth2AccessDeniedException ex){
-             throw new BadCredentialsException("Invalid Credentials",ex);
+        try {
+            accessToken = new ResourceOwnerPasswordAccessTokenProvider().obtainAccessToken(resourceDetails, accessTokenRequest);
+        } catch (OAuth2AccessDeniedException ex) {
+            throw new BadCredentialsException("Invalid Credentials", ex);
         }
         return accessToken;
     }

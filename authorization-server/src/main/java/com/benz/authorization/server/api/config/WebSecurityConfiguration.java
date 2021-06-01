@@ -19,10 +19,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
     private AuthEntryPoint authEntryPoint;
 
-    public WebSecurityConfiguration(UserDetailsService userDetailsService,AuthEntryPoint authEntryPoint)
-    {
-        this.userDetailsService=userDetailsService;
-        this.authEntryPoint=authEntryPoint;
+    public WebSecurityConfiguration(UserDetailsService userDetailsService, AuthEntryPoint authEntryPoint) {
+        this.userDetailsService = userDetailsService;
+        this.authEntryPoint = authEntryPoint;
     }
 
     @Override
@@ -31,26 +30,25 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         //authentication is implemented
     }
 
-    private AuthenticationProvider authenticationProvider_1()
-    {
-        DaoAuthenticationProvider authenticationProvider=new DaoAuthenticationProvider();
+    private AuthenticationProvider authenticationProvider_1() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService);
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder()
-    {
+    public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().exceptionHandling().authenticationEntryPoint(authEntryPoint)
-                .and().authorizeRequests().antMatchers("/auth/**").permitAll().
-        and().authorizeRequests().anyRequest().authenticated();
+                .and().authorizeRequests().antMatchers("/api/auth/**").permitAll().
+                and().authorizeRequests().anyRequest().authenticated();
         //authorization is implemented
+        http.cors();
     }
 
     @Override

@@ -14,8 +14,8 @@ import java.util.Objects;
 public class UserStatus {
 
     @Id
-    @SequenceGenerator(name = "STATUS_ID_GEN",sequenceName = Schema.SECURITYDB+".STATUS_ID_SEQ",initialValue = 6001,allocationSize = 1)
-    @GeneratedValue(generator = "STATUS_ID_GEN",strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "STATUS_ID_GEN", sequenceName = Schema.SECURITYDB + ".STATUS_ID_SEQ", initialValue = 6001, allocationSize = 1)
+    @GeneratedValue(generator = "STATUS_ID_GEN", strategy = GenerationType.SEQUENCE)
     @Column(name = "STATUS_ID")
     private long statusId;
     @Column(name = "ACTIVE")

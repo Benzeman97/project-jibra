@@ -10,8 +10,8 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "USERTABLE",schema = Schema.USERDB,uniqueConstraints = {
-      @UniqueConstraint(name = "email",columnNames = "EMAIL")
+@Table(name = "USERTABLE", schema = Schema.USERDB, uniqueConstraints = {
+        @UniqueConstraint(name = "email", columnNames = "EMAIL")
 })
 @Getter
 @Setter
@@ -23,11 +23,11 @@ public class User {
     @GeneratedValue(generator = "USER_ID_GEN", strategy = GenerationType.SEQUENCE)
     @Column(name = "USER_ID")
     private long userId;
-    @Column(name = "FIRST_NAME",nullable = false)
+    @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
     @Column(name = "LAST_NAME")
     private String lastName;
-    @Column(name = "EMAIL",nullable = false)
+    @Column(name = "EMAIL", nullable = false)
     private String email;
     @Column(name = "COUNTRY")
     private String country;
@@ -35,7 +35,7 @@ public class User {
     private Date dob;
     @Column(name = "TELE_NO")
     private String teleNo;
-    @Column(name = "PASSWORD",nullable = false)
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
     @Id
     @Column(name = "NIC_OR_PASSPORT")
@@ -45,16 +45,16 @@ public class User {
     @Column(name = "MODIFIED_DATE")
     private Date modifiedDate;
 
-    @OneToOne(targetEntity = UserStatus.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "STATUS_ID",referencedColumnName = "STATUS_ID")
+    @OneToOne(targetEntity = UserStatus.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "STATUS_ID", referencedColumnName = "STATUS_ID")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private UserStatus userStatus;
 
-    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "ROLE_USER",
-    joinColumns = {@JoinColumn(name = "USER_ID",referencedColumnName = "USER_ID"),
-            @JoinColumn(name = "NIC_OR_PASSPORT",referencedColumnName = "NIC_OR_PASSPORT")},
-    inverseJoinColumns = {@JoinColumn(name = "ROLE_ID",referencedColumnName = "ID")})
+            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID"),
+                    @JoinColumn(name = "NIC_OR_PASSPORT", referencedColumnName = "NIC_OR_PASSPORT")},
+            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
     private Set<Role> roles;
 
 }

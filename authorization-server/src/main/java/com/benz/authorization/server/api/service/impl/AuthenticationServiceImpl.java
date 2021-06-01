@@ -27,19 +27,19 @@ import java.util.Objects;
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
 
-     final private static Logger LOGGER = LogManager.getLogger(AuthenticationServiceImpl.class);
+    final private static Logger LOGGER = LogManager.getLogger(AuthenticationServiceImpl.class);
 
-     private UserDAO userDAO;
-     private OAuth2AuthenticationProvider authProvider;
+    private UserDAO userDAO;
+    private OAuth2AuthenticationProvider authProvider;
 
-     public AuthenticationServiceImpl(UserDAO userDAO,OAuth2AuthenticationProvider authProvider){
-         this.userDAO=userDAO;
-         this.authProvider=authProvider;
-     }
+    public AuthenticationServiceImpl(UserDAO userDAO, OAuth2AuthenticationProvider authProvider) {
+        this.userDAO = userDAO;
+        this.authProvider = authProvider;
+    }
 
     @Override
     public SignUpResponse userSignUp(SignUpRequest signUpRequest) throws Exception {
-        User user=new User();
+        User user = new User();
         user.setFirstName(signUpRequest.getFirstName());
         user.setLastName(signUpRequest.getLastName());
         user.setEmail(signUpRequest.getEmail());
@@ -49,7 +49,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setRegisteredDate(new Date());
         user.setModifiedDate(new Date());
 
-        UserStatus userStatus=new UserStatus();
+        UserStatus userStatus = new UserStatus();
         userStatus.setActive(1);
         userStatus.setAccNonExpired(1);
         userStatus.setAccNonLocked(1);
@@ -60,50 +60,56 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         User e_user = userDAO.findByEmail(signUpRequest.getEmail()).orElse(null);
 
-        if(Objects.nonNull(e_user))
-        {
-            LOGGER.error(String.format("User is existed with %s",e_user.getEmail()));
-            throw new UserExistedException(String.format("User is existed with %s",e_user.getEmail()));
+        if (Objects.nonNull(e_user)) {
+            LOGGER.error(String.format("User is existed with %s", e_user.getEmail()));
+            throw new UserExistedException(String.format("User is existed with %s", e_user.getEmail()));
         }
 
-        Date dob = new SimpleDateFormat("dd-MM-yyyy").parse(signUpRequest.getDob());
+        Date dob = new SimpleDateFormat("dd-MMM-yyyy").parse(getDOb(signUpRequest.getDob()));
         user.setDob(dob);
 
         String passwordPrefix = "{bcrypt}";
-       passwordPrefix = passwordPrefix.concat(BCrypt.hashpw(signUpRequest.getPassword(),BCrypt.gensalt(12)));
-       user.setPassword(passwordPrefix);
-       LOGGER.info(String.format("user has been registered with %s and %s",user.getNicOrPassport(),user.getEmail()));
-       userDAO.save(user);
-        return new SignUpResponse(user.getEmail(),authProvider.obtainToken(user.getEmail(),signUpRequest.getPassword()).getValue(),userStatus.getActive()==1);
+        passwordPrefix = passwordPrefix.concat(BCrypt.hashpw(signUpRequest.getPassword(), BCrypt.gensalt(12)));
+        user.setPassword(passwordPrefix);
+        LOGGER.info(String.format("user has been registered with %s and %s", user.getNicOrPassport(), user.getEmail()));
+        userDAO.save(user);
+        return new SignUpResponse(user.getEmail(), authProvider.obtainToken(user.getEmail(), signUpRequest.getPassword()).getValue(), userStatus.getActive() == 1);
     }
 
     @Override
     public LogInResponse userLogIn(LogInRequest logInRequest) throws Exception {
-         String username=logInRequest.getUsername();
-         String password=logInRequest.getPassword();
+        String username = logInRequest.getUsername();
+        String password = logInRequest.getPassword();
 
-         User user = userDAO.findByEmail(username).orElse(null);
+        User user = userDAO.findByEmail(username).orElse(null);
 
-         if(Objects.isNull(user))
-             throw new DataNotFoundException(String.format("user is not found with %s",username));
+        if (Objects.isNull(user))
+            throw new DataNotFoundException(String.format("user is not found with %s", username));
 
-         String prefix="{bcrypt}";
-         String hashPwd =  user.getPassword().substring(prefix.length());
+        String prefix = "{bcrypt}";
+        String hashPwd = user.getPassword().substring(prefix.length());
 
 
-         if(user.getEmail().equals(username) && BCrypt.checkpw(password,hashPwd))
-         {
-             OAuth2AccessToken accessToken = authProvider.obtainToken(username,password);
-             boolean isActive = accessToken.isExpired();
-             if(isActive)
-                 throw new BadCredentialsException(String.format("Token is expired with %s",username));
+        if (user.getEmail().equals(username) && BCrypt.checkpw(password, hashPwd)) {
+            OAuth2AccessToken accessToken = authProvider.obtainToken(username, password);
+            boolean isActive = accessToken.isExpired();
+            if (isActive)
+                throw new BadCredentialsException(String.format("Token is expired with %s", username));
 
-             LOGGER.info(String.format("user is logged with %s",username));
-             return new LogInResponse(user.getEmail(),accessToken.getValue(),!isActive);
-         }
-         LOGGER.error("username or password is incorrect");
-         throw new BadCredentialsException("username or password is incorrect");
+            LOGGER.info(String.format("user is logged with %s", username));
+            return new LogInResponse(user.getEmail(), accessToken.getValue(), !isActive);
+        }
+        LOGGER.error("username or password is incorrect");
+        throw new BadCredentialsException("username or password is incorrect");
+    }
 
+    private String getDOb(String dob)
+    {
+        String month = dob.substring(4,7);
+        String date = dob.substring(8,10);
+        String year = dob.substring(11);
+
+        return date.concat("-").concat(month).concat("-").concat(year);
 
     }
 }

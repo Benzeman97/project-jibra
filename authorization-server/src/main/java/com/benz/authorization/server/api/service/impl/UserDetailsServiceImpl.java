@@ -16,17 +16,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserDAO userDAO;
 
     @Autowired
-    public UserDetailsServiceImpl(UserDAO userDAO)
-    {
-        this.userDAO=userDAO;
+    public UserDetailsServiceImpl(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User user = userDAO.findByEmail(username)
-                .orElseThrow(()->new DataNotFoundException(String.format("data not found with %s",username)));
+                .orElseThrow(() -> new DataNotFoundException(String.format("data not found with %s", username)));
 
-                return AuthUserDetails.builder(user);
+        return AuthUserDetails.builder(user);
     }
 }

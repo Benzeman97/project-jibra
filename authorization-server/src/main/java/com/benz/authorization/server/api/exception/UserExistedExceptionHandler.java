@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class UserExistedExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<ErrorMessage> toResponse(UserExistedException ex)
-    {
-        ErrorMessage errorMessage=new ErrorMessage(HttpStatus.CONFLICT.value(),ex.getMessage(),"www.benz.com");
-        return new ResponseEntity<>(errorMessage,HttpStatus.CONFLICT);
+    public ResponseEntity<ErrorMessage> toResponse(UserExistedException ex) {
+        ErrorMessage errorMessage = new ErrorMessage(HttpStatus.CONFLICT.value(), ex.getMessage(), "www.benz.com");
+        return new ResponseEntity<>(errorMessage, HttpStatus.CONFLICT);
     }
 }

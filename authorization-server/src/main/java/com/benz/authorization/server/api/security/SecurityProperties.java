@@ -26,7 +26,7 @@ public class SecurityProperties {
         this.auth = auth;
     }
 
-    public static class JwtProperties{
+    public static class JwtProperties {
 
         private Resource keyStore;
         private String keyStorePassword;
@@ -66,7 +66,7 @@ public class SecurityProperties {
         }
     }
 
-    public static class OAuth2Properties{
+    public static class OAuth2Properties {
 
         private String accessTokenUri;
         private String clientId;
