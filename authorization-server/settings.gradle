@@ -2,6 +2,6 @@ rootProject.name = 'authorization-server'
 
 buildCache {
     local {
-        directory= "D:/Build Tools/.gradle/caches"
+        directory = "D:/Build Tools/.gradle/caches"
     }
 }

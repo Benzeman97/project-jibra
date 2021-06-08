@@ -30,7 +30,7 @@ public class AuthenticationController {
 
     @PostMapping(value = "/login", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<LogInResponse> userLogIn(@RequestBody LogInRequest request) throws Exception {
-        return (request.getUsername().trim().isEmpty() && request.getPassword().trim().isEmpty()) ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) :
+       return (request.getUserName().trim().isEmpty() && request.getPassword().trim().isEmpty()) ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) :
                 ResponseEntity.ok(authenticationService.userLogIn(request));
     }
 	

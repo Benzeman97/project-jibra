@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -32,7 +34,7 @@ public class User {
     @Column(name = "COUNTRY")
     private String country;
     @Column(name = "DOB")
-    private Date dob;
+    private LocalDate dob;
     @Column(name = "TELE_NO")
     private String teleNo;
     @Column(name = "PASSWORD", nullable = false)
@@ -41,9 +43,9 @@ public class User {
     @Column(name = "NIC_OR_PASSPORT")
     private String nicOrPassport;
     @Column(name = "REGISTERED_DATE")
-    private Date registeredDate;
+    private LocalDateTime registeredDate;
     @Column(name = "MODIFIED_DATE")
-    private Date modifiedDate;
+    private LocalDateTime modifiedDate;
 
     @OneToOne(targetEntity = UserStatus.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "STATUS_ID", referencedColumnName = "STATUS_ID")

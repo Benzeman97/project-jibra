@@ -1,7 +1,6 @@
 package com.benz.authorization.server.api.service.impl;
 
 import com.benz.authorization.server.api.dao.UserDAO;
-import com.benz.authorization.server.api.db.EPermission;
 import com.benz.authorization.server.api.entity.User;
 import com.benz.authorization.server.api.entity.UserStatus;
 import com.benz.authorization.server.api.exception.DataNotFoundException;
@@ -19,10 +18,10 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
-
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -46,8 +45,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setCountry(signUpRequest.getCountry());
         user.setTeleNo(signUpRequest.getTeleNo());
         user.setNicOrPassport(signUpRequest.getNicOrPassport());
-        user.setRegisteredDate(new Date());
-        user.setModifiedDate(new Date());
+        user.setRegisteredDate(LocalDateTime.now());
+        user.setModifiedDate(LocalDateTime.now());
 
         UserStatus userStatus = new UserStatus();
         userStatus.setActive(1);
@@ -65,7 +64,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             throw new UserExistedException(String.format("User is existed with %s", e_user.getEmail()));
         }
 
-        Date dob = new SimpleDateFormat("dd-MMM-yyyy").parse(getDOb(signUpRequest.getDob()));
+         DateTimeFormatter dateFormat= DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+        LocalDate dob = LocalDate.parse(getDOb(signUpRequest.getDob()),dateFormat);
         user.setDob(dob);
 
         String passwordPrefix = "{bcrypt}";
@@ -74,11 +74,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         LOGGER.info(String.format("user has been registered with %s and %s", user.getNicOrPassport(), user.getEmail()));
         userDAO.save(user);
         return new SignUpResponse(user.getEmail(), authProvider.obtainToken(user.getEmail(), signUpRequest.getPassword()).getValue(), userStatus.getActive() == 1);
+
     }
 
     @Override
     public LogInResponse userLogIn(LogInRequest logInRequest) throws Exception {
-        String username = logInRequest.getUsername();
+        String username = logInRequest.getUserName();
         String password = logInRequest.getPassword();
 
         User user = userDAO.findByEmail(username).orElse(null);
@@ -105,11 +106,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private String getDOb(String dob)
     {
-        String month = dob.substring(4,7);
-        String date = dob.substring(8,10);
-        String year = dob.substring(11);
+        String[] birth = dob.split("-");
+        String month = birth[1].toLowerCase();
+        String day = birth[0];
+        String year = birth[2];
 
-        return date.concat("-").concat(month).concat("-").concat(year);
+        month = month.substring(0,3);
+        char[] mo=month.toCharArray();
+        mo[0] = Character.toUpperCase(mo[0]);
+        month = new String(mo);
+
+        return day.concat("-").concat(month).concat("-").concat(year);
 
     }
 }
