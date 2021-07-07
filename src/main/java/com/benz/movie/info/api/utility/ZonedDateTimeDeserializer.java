@@ -16,8 +16,8 @@ public class ZonedDateTimeDeserializer extends JsonDeserializer<ZonedDateTime> {
     @Override
     public ZonedDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 
-        DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss z");
-        LocalDate localDate = LocalDate.parse(p.getText(),dateTimeFormatter);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss z");
+        LocalDate localDate = LocalDate.parse(p.getText(), dateTimeFormatter);
 
         return localDate.atStartOfDay(ZoneOffset.UTC);
     }

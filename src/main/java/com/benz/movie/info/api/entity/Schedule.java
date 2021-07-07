@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.time.ZonedDateTime;
 
 @Entity
-@Table(name = "SCHEDULE",schema = Schema.MOVIEDB)
+@Table(name = "SCHEDULE", schema = Schema.MOVIEDB)
 @Getter
 @Setter
 public class Schedule {

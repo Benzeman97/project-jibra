@@ -10,3 +10,19 @@ spring:
       ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+
+security:
+  jwt:
+    public-key: classpath:public.txt
+
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: 'http://${discovery.server.hostName}:${discovery.server.port}/eureka'
+
+
+discovery:
+  server:
+    port: 8000
+    hostName: 127.0.0.1

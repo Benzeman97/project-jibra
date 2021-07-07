@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class MovieExistedExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<ErrorMessage> toResponse(MovieExistedException ex)
-    {
-        ErrorMessage errorMessage=new ErrorMessage(409,ex.getMessage(),"www.benz.com");
+    public ResponseEntity<ErrorMessage> toResponse(MovieExistedException ex) {
+        ErrorMessage errorMessage = new ErrorMessage(409, ex.getMessage(), "www.benz.com");
         return new ResponseEntity<>(errorMessage, HttpStatus.CONFLICT);
     }
 }
