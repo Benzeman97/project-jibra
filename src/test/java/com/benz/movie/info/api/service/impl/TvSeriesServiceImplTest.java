@@ -3,7 +3,7 @@ package com.benz.movie.info.api.service.impl;
 import com.benz.movie.info.api.dao.TvSeriesDao;
 import com.benz.movie.info.api.dao.TvSeriesRateDao;
 import com.benz.movie.info.api.entity.*;
-import com.benz.movie.info.api.model.TvSeriesInfo;
+import com.benz.movie.info.api.dto.response.TvSeriesInfo;
 import com.benz.movie.info.api.service.TvSeriesService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

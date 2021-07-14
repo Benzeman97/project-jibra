@@ -1,4 +1,4 @@
-package com.benz.movie.info.api.model;
+package com.benz.movie.info.api.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Rating {
+public class Item {
 
-    private double rate;
-    private int star;
-    private long totalPoints;
+    private String email;
+    private String type_id;
 }

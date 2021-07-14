@@ -1,6 +1,6 @@
 package com.benz.movie.info.api.controller;
 
-import com.benz.movie.info.api.model.Rating;
+import com.benz.movie.info.api.dto.request.Rating;
 import com.benz.movie.info.api.security.AuthEntryPoint;
 import com.benz.movie.info.api.service.MovieInfoService;
 import com.benz.movie.info.api.service.MovieUserService;

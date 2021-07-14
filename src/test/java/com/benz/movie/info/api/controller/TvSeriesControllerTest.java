@@ -1,7 +1,7 @@
 package com.benz.movie.info.api.controller;
 
 import com.benz.movie.info.api.entity.*;
-import com.benz.movie.info.api.model.TvSeriesInfo;
+import com.benz.movie.info.api.dto.response.TvSeriesInfo;
 import com.benz.movie.info.api.security.AuthEntryPoint;
 import com.benz.movie.info.api.service.TvSeriesService;
 import org.junit.jupiter.api.Assertions;

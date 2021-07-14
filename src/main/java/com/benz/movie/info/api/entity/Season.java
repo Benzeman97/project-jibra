@@ -14,9 +14,9 @@ import java.util.Set;
 public class Season {
 
     @Id
-    @Column(name = "SEASON_ID")
+    @Column(name = "SEASON_ID",nullable = false)
     private String seasonId;
-    @Column(name = "SEASON_NAME")
+    @Column(name = "SEASON_NAME",nullable = false)
     private String seasonName;
     @Column(name = "IMG_URL")
     private String imgUrl;

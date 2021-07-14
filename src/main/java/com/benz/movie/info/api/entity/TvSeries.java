@@ -1,12 +1,12 @@
 package com.benz.movie.info.api.entity;
 
 import com.benz.movie.info.api.db.Schema;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,12 +15,13 @@ import java.util.Set;
 })
 @Getter
 @Setter
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class TvSeries {
 
     @Id
-    @Column(name = "SERIES_ID")
+    @Column(name = "SERIES_ID",nullable = false)
     private String seriesId;
-    @Column(name = "SERIES_NAME")
+    @Column(name = "SERIES_NAME",nullable = false)
     private String seriesName;
     @Column(name = "RELEASED_DATE")
     private LocalDate releasedDate;
@@ -34,16 +35,18 @@ public class TvSeries {
     private String imgUrl;
     @Column(name = "DESCRIPTION")
     private String description;
+    @Column(name = "COUNTRY_CODE")
+    private String countryCode;
 
-    @OneToMany(targetEntity = Season.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Season.class,cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn(name = "SERIES_ID",referencedColumnName = "SERIES_ID")
     private Set<Season> seasons;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = TvSeriesRate.class)
+    @OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,targetEntity = TvSeriesRate.class)
     @JoinColumn(name = "SERIES_ID",referencedColumnName = "SERIES_ID")
     private Set<TvSeriesRate> tvSeriesRate;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinTable(name = "TV_SERIES_CAST",
     joinColumns = {@JoinColumn(name = "SERIES_ID",referencedColumnName = "SERIES_ID")},
     inverseJoinColumns = {@JoinColumn(name = "CAST_ID",referencedColumnName = "CAST_ID")})

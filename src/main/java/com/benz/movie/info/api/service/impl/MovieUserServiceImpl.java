@@ -5,7 +5,7 @@ import com.benz.movie.info.api.dao.MovieRateDao;
 import com.benz.movie.info.api.entity.Movie;
 import com.benz.movie.info.api.entity.MovieRate;
 import com.benz.movie.info.api.exception.DataNotFoundException;
-import com.benz.movie.info.api.model.Rating;
+import com.benz.movie.info.api.dto.request.Rating;
 import com.benz.movie.info.api.service.MovieUserService;
 import org.springframework.stereotype.Service;
 

@@ -13,9 +13,9 @@ import javax.persistence.*;
 public class Episode {
 
     @Id
-    @Column(name = "EPISODE_ID")
+    @Column(name = "EPISODE_ID",nullable = false)
     private String episodeId;
-    @Column(name = "NAME")
+    @Column(name = "NAME",nullable = false)
     private String name;
     @Column(name = "DURATION")
     private String duration;

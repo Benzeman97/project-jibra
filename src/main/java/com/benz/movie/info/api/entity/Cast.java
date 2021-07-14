@@ -13,9 +13,9 @@ import javax.persistence.*;
 public class Cast {
 
     @Id
-    @Column(name = "CAST_ID")
+    @Column(name = "CAST_ID",nullable = false)
     private String castId;
-    @Column(name = "NAME")
+    @Column(name = "NAME",nullable = false)
     private String name;
     @Column(name = "IMG_URL")
     private String imgUrl;
