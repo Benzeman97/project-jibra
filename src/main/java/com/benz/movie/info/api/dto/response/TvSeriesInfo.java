@@ -5,7 +5,6 @@ import com.benz.movie.info.api.entity.Season;
 import lombok.*;
 
 import java.util.List;
-import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,6 +23,6 @@ public class TvSeriesInfo {
     private String desc;
     private long ratedUser;
     private String c_code;
-    private Set<Cast> casts;
+    private List<Cast> casts;
     private List<Season> seasons;
 }

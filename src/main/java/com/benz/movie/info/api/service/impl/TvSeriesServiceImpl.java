@@ -11,6 +11,7 @@ import com.benz.movie.info.api.dto.response.UserList;
 import com.benz.movie.info.api.service.TvSeriesService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
@@ -199,7 +200,7 @@ public class TvSeriesServiceImpl implements TvSeriesService {
          }
 
          List<TvSeriesInfo> tvSeriesInfos = favTvSeries.stream().flatMap(t->t.getTvSeries().getTvSeriesRate().stream()
-         .map(r->getTvSeriesInfo(t.getTvSeries(),r))).collect(Collectors.toList());
+         .map(rate->getTvSeriesInfo(t.getTvSeries(),rate))).collect(Collectors.toList());
 
          User user = favTvSeries.get(0).getUser();
 
@@ -225,6 +226,24 @@ public class TvSeriesServiceImpl implements TvSeriesService {
             return new UserList(user,tvSeriesInfos);
     }
 
+    @Override
+    public List<TvSeriesInfo> findTvSeriesInfoBySearch(String name) {
+
+        List<TvSeries> tvSeries = tvSeriesDao.findTvSeriesBySearch(name).orElse(new ArrayList<>());
+
+        if(tvSeries.size()<=0)
+        {
+            LOGGER.warn("no tv series available in db");
+            throw new DataNotFoundException("no tv series available in db");
+        }
+
+         List<TvSeriesInfo> tvSeriesInfos = tvSeries.stream().flatMap(t->t.getTvSeriesRate().stream()
+          .map(rate->getTvSeriesInfo(t,rate))).collect(Collectors.toList());
+
+
+        return tvSeriesInfos;
+    }
+
     private boolean checkUserWithRemainderList(Predicate<List<RemainderItem>> predicate,List<RemainderItem> remainderItems){
          return predicate.test(remainderItems);
     }
@@ -241,7 +260,8 @@ public class TvSeriesServiceImpl implements TvSeriesService {
         return new TvSeriesInfo(tvSeries.getSeriesId(),tvSeries.getSeriesName(),tvSeries.getTypes(),
                 tvSeries.getCountry(),tvSeriesRate.getRate(),tvSeries.getImgUrl(),tvSeries.getReleasedDate().format(formatter),
                 tvSeries.getLanguage(),tvSeries.getDescription(),tvSeriesRate.getRatedUser(),tvSeries.getCountryCode(),
-                tvSeries.getCasts(),tvSeries.getSeasons().stream().sorted(Comparator.comparing(Season::getSeasonName)).collect(Collectors.toList()));
+                new ArrayList<Cast>(tvSeries.getCasts().stream().sorted(Comparator.comparing(Cast::getCastId)).collect(Collectors.toList())),
+                tvSeries.getSeasons().stream().sorted(Comparator.comparing(Season::getSeasonName)).collect(Collectors.toList()));
 
     }
 
@@ -276,10 +296,7 @@ public class TvSeriesServiceImpl implements TvSeriesService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
 
         List<TvSeriesInfo> tvSeriesInfoByRate =
-                tvSeriesList.stream().flatMap(s -> s.getTvSeriesRate().stream()
-                        .map(r -> new TvSeriesInfo(s.getSeriesId(), s.getSeriesName(), s.getTypes(), s.getCountry(), r.getRate(), s.getImgUrl(),s.getReleasedDate().format(formatter)
-                                ,s.getLanguage(),s.getDescription(),r.getRatedUser(),s.getCountryCode(),s.getCasts()
-                        ,new ArrayList<Season>(s.getSeasons().stream().sorted(Comparator.comparing(Season::getSeasonName)).collect(Collectors.toList())))))
+                tvSeriesList.stream().flatMap(s -> tvSeriesInfo(s).stream().map(t->t))
                         .collect(Collectors.toList());
 
         Collections.sort(tvSeriesInfoByRate, Comparator.comparingDouble(TvSeriesInfo::getRate).reversed());
@@ -296,14 +313,21 @@ public class TvSeriesServiceImpl implements TvSeriesService {
 
         List<TvSeriesInfo> tvSeriesInfoByDate =
                 tvSeriesList.stream().sorted(Comparator.comparing(TvSeries::getReleasedDate).reversed())
-                        .flatMap(s -> s.getTvSeriesRate().stream().map(r -> new TvSeriesInfo(s.getSeriesId(), s.getSeriesName(),
-                                s.getTypes(), s.getCountry(), r.getRate(), s.getImgUrl(),s.getReleasedDate().format(formatter),s.getLanguage(),s.getDescription(),r.getRatedUser(),
-                                s.getCountryCode(),s.getCasts(),new ArrayList<Season>(s.getSeasons().stream().sorted(Comparator.comparing(Season::getSeasonName)).collect(Collectors.toList())))
-                        )).collect(Collectors.toList());
+                        .flatMap(s -> tvSeriesInfo(s).stream().map(t->t)).collect(Collectors.toList());
 
         LOGGER.info("tv series info is sorted by date");
 
         return tvSeriesInfoByDate;
+    }
+
+    private List<TvSeriesInfo> tvSeriesInfo(TvSeries tvSeries){
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+
+       return tvSeries.getTvSeriesRate().stream().map(rate->new TvSeriesInfo(tvSeries.getSeriesId(),tvSeries.getSeriesName(),
+                  tvSeries.getTypes(),tvSeries.getCountry(),rate.getRate(),tvSeries.getImgUrl(),tvSeries.getReleasedDate().format(formatter),tvSeries.getLanguage(),
+                tvSeries.getDescription(),rate.getRatedUser(),tvSeries.getCountryCode(),new ArrayList<Cast>(tvSeries.getCasts().stream().sorted(Comparator.comparing(Cast::getCastId)).collect(Collectors.toList())),
+                new ArrayList<Season>(tvSeries.getSeasons().stream().sorted(Comparator.comparing(Season::getSeasonName)).collect(Collectors.toList())))).collect(Collectors.toList());
     }
 
     private List<TvSeriesInfo> filterTvServiceInfo(List<TvSeriesInfo> tvSeriesInfoByDate,

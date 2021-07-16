@@ -24,5 +24,6 @@ public interface TvSeriesService {
     User findUser(String email);
     UserList gatFavoriteTvSeriesByUser(RequestList list);
     UserList getRemainderListByUser(RequestList list);
+    List<TvSeriesInfo> findTvSeriesInfoBySearch(String name);
 
 }

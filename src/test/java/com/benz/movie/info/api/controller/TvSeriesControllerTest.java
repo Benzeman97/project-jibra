@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -89,6 +90,38 @@ public class TvSeriesControllerTest {
         Assertions.assertEquals(expectedResponse,actualResponse,()->"expected "+expectedResponse+" but actual was "+actualResponse);
 
     }
+
+    @Test
+    @DisplayName("getTvSeriesInfoBySearchTest")
+    public void getTvSeriesInfoBySearchTest() throws Exception{
+
+        Mockito.when(tvSeriesService.findTvSeriesInfoBySearch(Mockito.any(String.class)))
+                .thenReturn(Arrays.asList(tvSeriesInfo_1()));
+
+        MvcResult result = mockMvc.perform(get("/api/tv-series/search").param("name","vi"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        int expectedResponse = HttpStatus.OK.value();
+        int actualResponse = result.getResponse().getStatus();
+
+        Assertions.assertEquals(expectedResponse,actualResponse,()->"expected "+expectedResponse+" but actual was "+actualResponse);
+    }
+
+    private TvSeriesInfo tvSeriesInfo_1()
+    {
+        TvSeries tvSeries=tvSeries_1();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+
+        return new TvSeriesInfo(tvSeries.getSeriesId(),tvSeries.getSeriesName(),tvSeries.getTypes(),
+                tvSeries.getCountry(),new ArrayList<TvSeriesRate>(tvSeries.getTvSeriesRate()).get(0).getRate()
+                ,tvSeries.getImgUrl(),tvSeries.getReleasedDate().format(formatter),
+                tvSeries.getLanguage(),tvSeries.getDescription(),new ArrayList<TvSeriesRate>(tvSeries.getTvSeriesRate()).get(0).getRatedUser()
+                ,tvSeries.getCountryCode(),new ArrayList<Cast>(tvSeries.getCasts()),
+                new ArrayList<Season>(tvSeries.getSeasons()));
+    }
+
 
     private TvSeries tvSeries_1(){
         TvSeries tvSeries=new TvSeries();
@@ -165,7 +198,7 @@ public class TvSeriesControllerTest {
         return cast;
     }
 
-    private TvSeriesInfo tvSeriesInfo_1(){
-        return new TvSeriesInfo("V1056","Vikings","crime,thriller,horror","USA",8.9,"https://vikings.jpa");
-    }
+//    private TvSeriesInfo tvSeriesInfo_1(){
+//        return new TvSeriesInfo("V1056","Vikings","crime,thriller,horror","USA",8.9,"https://vikings.jpa");
+//    }
 }

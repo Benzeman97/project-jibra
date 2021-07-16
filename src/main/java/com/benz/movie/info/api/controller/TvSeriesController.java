@@ -81,17 +81,25 @@ public class TvSeriesController {
 
     }
 
-    @PostMapping(value = "/favoriteList",produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/favoriteList",produces = {MediaType.APPLICATION_JSON_VALUE}) //protected resource
     public ResponseEntity<UserList> favoriteTvSeriesByUser(@RequestBody RequestList list){
         return (list.getEmail().trim().isEmpty()) ?
                 new ResponseEntity<>(HttpStatus.BAD_REQUEST) :
                 new ResponseEntity<>(tvSeriesService.gatFavoriteTvSeriesByUser(list),HttpStatus.OK);
     }
 
-    @PostMapping("/remainderList")
+    @PostMapping(value = "/remainderList",produces = {MediaType.APPLICATION_JSON_VALUE}) //protected resource
     public ResponseEntity<UserList> remainderListByUser(@RequestBody RequestList list){
          return (list.getEmail().trim().isEmpty()) ?
                  new ResponseEntity<>(HttpStatus.BAD_REQUEST) :
                  new ResponseEntity<>(tvSeriesService.getRemainderListByUser(list),HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<TvSeriesInfo>> getTvSeriesInfoBySearch(@RequestParam("name") String name){
+        return (name.trim().isEmpty()) ?
+                 new ResponseEntity<>(HttpStatus.BAD_REQUEST) :
+                new ResponseEntity<>(tvSeriesService.findTvSeriesInfoBySearch(name),HttpStatus.OK);
+
     }
 }

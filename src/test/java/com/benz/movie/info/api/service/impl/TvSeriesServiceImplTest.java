@@ -92,10 +92,40 @@ public class TvSeriesServiceImplTest {
         Assertions.assertEquals(expectedTvSeriesInfo.size(),actualTvSeriesInfo.size(),"returned sorted tv series info");
     }
 
+    @Test
+    @DisplayName("findTvSeriesInfoBySearchTest")
+    public void findTvSeriesInfoBySearchTest(){
+         String name="vi";
+
+        List<TvSeries> tvSeriesList = new ArrayList<>(Arrays.asList(tvSeries_1()));
+
+        List<TvSeriesInfo> expectedTvSeriesInfo = new ArrayList<>(Arrays.asList(tvSeriesInfo_1()));
+
+         Mockito.when(tvSeriesDao.findTvSeriesBySearch(name)).thenReturn(Optional.of(tvSeriesList));
+
+         List<TvSeriesInfo> actualTvSeriesInfo = tvSeriesService.findTvSeriesInfoBySearch(name);
+
+         Assertions.assertEquals(expectedTvSeriesInfo.size(),actualTvSeriesInfo.size(),"returned tv series info with search name");
+    }
+
+    private TvSeriesInfo tvSeriesInfo_1()
+    {
+        TvSeries tvSeries=tvSeries_1();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+
+        return new TvSeriesInfo(tvSeries.getSeriesId(),tvSeries.getSeriesName(),tvSeries.getTypes(),
+                tvSeries.getCountry(),new ArrayList<TvSeriesRate>(tvSeries.getTvSeriesRate()).get(0).getRate()
+                ,tvSeries.getImgUrl(),tvSeries.getReleasedDate().format(formatter),
+                tvSeries.getLanguage(),tvSeries.getDescription(),new ArrayList<TvSeriesRate>(tvSeries.getTvSeriesRate()).get(0).getRatedUser()
+                ,tvSeries.getCountryCode(),new ArrayList<Cast>(tvSeries.getCasts()),
+                new ArrayList<Season>(tvSeries.getSeasons()));
+    }
+
     private TvSeries tvSeries_1(){
         TvSeries tvSeries=new TvSeries();
         tvSeries.setSeriesId("V1056");
-        tvSeries.setSeriesName("Vikings");
+        tvSeries.setSeriesName("vikings");
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         tvSeries.setReleasedDate(LocalDate.parse("23-12-2012",formatter));
@@ -167,8 +197,8 @@ public class TvSeriesServiceImplTest {
         return cast;
     }
 
-    private TvSeriesInfo tvSeriesInfo_1(){
+ /*   private TvSeriesInfo tvSeriesInfo_1(){
         return new TvSeriesInfo("V1056","Vikings","crime,thriller,horror","USA",8.9,"https://vikings.jpa");
-    }
+    }*/
 
 }
