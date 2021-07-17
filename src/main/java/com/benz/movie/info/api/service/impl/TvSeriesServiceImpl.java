@@ -11,7 +11,6 @@ import com.benz.movie.info.api.dto.response.UserList;
 import com.benz.movie.info.api.service.TvSeriesService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
@@ -20,6 +19,16 @@ import java.util.*;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+@FunctionalInterface
+interface SearchList<T>{
+    List<T> searchList(List<TvSeries> list);
+}
+
+@FunctionalInterface
+interface CustomList<T>{
+    List<TvSeriesInfo> getList(List<T> list);
+}
 
 @Service
 public class TvSeriesServiceImpl implements TvSeriesService {
@@ -199,8 +208,10 @@ public class TvSeriesServiceImpl implements TvSeriesService {
              throw new DataNotFoundException(String.format("user is not found with %s",reqList.getEmail()));
          }
 
-         List<TvSeriesInfo> tvSeriesInfos = favTvSeries.stream().flatMap(t->t.getTvSeries().getTvSeriesRate().stream()
-         .map(rate->getTvSeriesInfo(t.getTvSeries(),rate))).collect(Collectors.toList());
+
+        List<TvSeriesInfo> tvSeriesInfos = getCustomList(favTvSeries,favSeries ->favSeries.stream().flatMap(fav->fav.getTvSeries().getTvSeriesRate().stream()
+                    .map(rate->getTvSeriesInfo(fav.getTvSeries(),rate))).collect(Collectors.toList()));
+
 
          User user = favTvSeries.get(0).getUser();
 
@@ -218,13 +229,14 @@ public class TvSeriesServiceImpl implements TvSeriesService {
                 throw new DataNotFoundException(String.format("user is not found with %s",reqList.getEmail()));
             }
 
-           List<TvSeriesInfo> tvSeriesInfos = remainderItems.stream().flatMap(rem->rem.getTvSeries().getTvSeriesRate()
-            .stream().map(rate->getTvSeriesInfo(rem.getTvSeries(),rate))).collect(Collectors.toList());
+        List<TvSeriesInfo> tvSeriesInfos = getCustomList(remainderItems,remItems -> remItems.stream().flatMap(rem->rem.getTvSeries().getTvSeriesRate()
+                .stream().map(rate->getTvSeriesInfo(rem.getTvSeries(),rate))).collect(Collectors.toList()));
 
-            User user = remainderItems.get(0).getUser();
+        User user = remainderItems.get(0).getUser();
 
             return new UserList(user,tvSeriesInfos);
     }
+
 
     @Override
     public List<TvSeriesInfo> findTvSeriesInfoBySearch(String name) {
@@ -237,12 +249,24 @@ public class TvSeriesServiceImpl implements TvSeriesService {
             throw new DataNotFoundException("no tv series available in db");
         }
 
-         List<TvSeriesInfo> tvSeriesInfos = tvSeries.stream().flatMap(t->t.getTvSeriesRate().stream()
-          .map(rate->getTvSeriesInfo(t,rate))).collect(Collectors.toList());
 
+        List<TvSeriesInfo> tvSeriesInfos = getSearchList(tvSeries,list -> tvSeries.stream().flatMap(t->t.getTvSeriesRate().stream()
+                    .map(rate->getTvSeriesInfo(t,rate))).collect(Collectors.toList()));
 
-        return tvSeriesInfos;
+       return tvSeriesInfos;
+
     }
+
+    private <T> List<TvSeriesInfo> getCustomList(List<T> tvSeries,CustomList<T> customList){
+        return customList.getList(tvSeries);
+    }
+
+    private List<TvSeriesInfo> getSearchList(List<TvSeries> tvSeries,
+                                             SearchList<TvSeriesInfo> customList){
+
+         return customList.searchList(tvSeries);
+    }
+
 
     private boolean checkUserWithRemainderList(Predicate<List<RemainderItem>> predicate,List<RemainderItem> remainderItems){
          return predicate.test(remainderItems);

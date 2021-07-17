@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "*",maxAge = 3600)
@@ -98,7 +99,7 @@ public class TvSeriesController {
     @GetMapping("/search")
     public ResponseEntity<List<TvSeriesInfo>> getTvSeriesInfoBySearch(@RequestParam("name") String name){
         return (name.trim().isEmpty()) ?
-                 new ResponseEntity<>(HttpStatus.BAD_REQUEST) :
+                 new ResponseEntity<>(new ArrayList<TvSeriesInfo>(),HttpStatus.OK) :
                 new ResponseEntity<>(tvSeriesService.findTvSeriesInfoBySearch(name),HttpStatus.OK);
 
     }
